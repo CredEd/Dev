@@ -1,0 +1,799 @@
+
+// Global variables
+var coursesData        = undefined;
+var coursesView        = undefined;
+var syncInProcess      = false;
+var accountsValid      = false;
+var hasSyncAcc         = false;
+var loadingCoursesView = true;
+var studentId          = undefined;
+
+
+function SetEnrolledCourseString(enrolledTitleNum, enrolledCourseStr, coursesSortedLen, courseSorted) {
+
+   if (courseSorted.title != null) {
+
+      enrolledTitleNum++;
+
+      var date           = "";
+      var progressStatus = "";
+      var progressLabel  = "";
+
+      if (enrolledTitleNum === 0) {
+         enrolledCourseStr += '<div class="row">';
+      }
+      else if (enrolledTitleNum % 4 === 0) {
+         enrolledCourseStr += '</div><div class="row">';
+      }
+
+      if (courseSorted.tableName === "udemy" ||
+            (courseSorted.startDate == null && courseSorted.endDate == null)) {
+         date = "Self Paced";
+      }
+      else if (courseSorted.startDate != null && courseSorted.progress < 100) {
+         var startDate    = new Date(courseSorted.startDate);
+         var startDateStr = startDate.getMonth() + 1 + "/" + startDate.getDate() + "/" + startDate.getFullYear();
+         date = "Starts: " + startDateStr;
+      }
+      else if (courseSorted.endDate != null && courseSorted.progress < 100) {
+         var endDate    = new Date(courseSorted.endDate);
+         var endDateStr = endDate.getMonth() + 1 + "/" + endDate.getDate() + "/" + endDate.getFullYear();
+         date = "Ends: " + endDateStr;
+      }
+
+      if (courseSorted.progress !== 0) {
+         progressStatus = courseSorted.progress + "%";
+         progressLabel  = '<div class="label label-info">In Progress</div>';
+
+         if (courseSorted.progress >= 100) {
+            progressLabel = '<div class="label label-success">Completed</div>';
+         }
+      }
+
+      enrolledCourseStr +=
+            '<div class="col-md-3"><div class="panel panel-courses mt-lg">' +
+               '<div class="panel-heading bg-white">' +
+                  '<div class="pull-right">' +
+                     '<div class="btn-group dropdown">' +
+                        '<button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button>' +
+                        '<ul role="menu" class="dropdown-menu dropdown-menu-right">' +
+                           '<li><a href="#"' +
+                           'data-toggle="modal"' +
+                           'data-target="#share-course"' +
+                           'data-course-id="' + courseSorted.courseId + '"' +
+                           'data-course-tablename="' + courseSorted.tableName + '"' +
+                           'data-course-url="/Course/'+courseSorted.tableName+'/'+courseSorted.slug+'" ' +
+                           'data-course-title="' + courseSorted.title + '" ' +
+                           'data-course-img="' + courseSorted.imageLink.replace("~", "..") + '">' +
+                              '<span>Share</span>' +
+                           '</a></li>' +
+                           '<li class="nav-divider"></li>' +
+                           '<li><a href="/Course/'+courseSorted.tableName+'/'+courseSorted.slug+ '" target="_blank">' +
+                              '<span>Course Info</span>' +
+                           '</li>' +
+                           //'<li class="nav-divider"></li>' +
+                           //'<li><a href="javascript:void(0)">' +
+                           //   '<span class="text-muted">Import Certificate</span>' +
+                           //'</a></li>' +
+                        '</ul></div></div></div>';
+
+      enrolledCourseStr +=
+            '<div class="panel-body panel-enrolled-courses text-center">' +
+            '<a href="' + courseSorted.url + '"' +
+               'target="_blank" title="' + courseSorted.title + '" class="link-unstyled text-primary">' +
+               '<div class="course-image-container" style="background-image: url(\'' + courseSorted.imageLink.replace("~", "..")+"?h=190" + '\')"></div>' +
+               '<br><span class="h5"><strong>' + courseSorted.title + '</strong></span><br>' +
+               '<span class="text-sm text-muted mb-lg">' + date + '</span>' +
+            '</a>' +
+            '</div>';
+
+      enrolledCourseStr +=
+            '<div class="panel-footer panel-footer-clear clearfix">' +
+            '<div class="progress progress-courses">' +
+               '<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="' + courseSorted.progress + '" ' +
+                     'aria-valuemin="0" aria-valuemax="100" style="width: ' + courseSorted.progress + '%">' +
+               '</div>' +
+            '</div>' +
+            '<div class="text-center"><span class="text-muted">' + progressStatus + '</span></div>' +
+               '<div class="pull-left">' + progressLabel + '</div>' +
+            '</div></div></div>';
+
+      if (enrolledTitleNum === (coursesSortedLen - 1)) {
+         enrolledCourseStr += "</div>";
+      }
+   }
+
+   return {
+      "EnrolledTitleNum": enrolledTitleNum,
+      "EnrolledCourseStr": enrolledCourseStr
+   };
+}
+
+function SetMyCoursesView(thePanel) {
+
+   setTimeout(function() {
+      if (!loadingCoursesView) {
+         var orderOptions  = $("input[class='sEnrolledFilter']");
+         var groupCollapse = $(".collapse.in");
+         var i = 0;
+
+         coursesView = {
+            view: {
+               sortBy: "",
+               groupBy: "",
+               groupCollapse: ""
+            }
+         };
+
+         for (i = 0; i < orderOptions.length; i++) {
+            if (orderOptions[i].checked === true) {
+               if (orderOptions[i].id.includes("by")) {
+                  coursesView.view.sortBy = orderOptions[i].id;
+               }
+               else if (orderOptions[i].id.includes("group")) {
+                  coursesView.view.groupBy = orderOptions[i].id;
+               }
+            }
+         }
+
+         for (i = 0; i < groupCollapse.length; i++) {
+            coursesView.view.groupCollapse += groupCollapse[i].id + ",";
+         }
+
+         if (thePanel != undefined && $(thePanel.hash).hasClass("in") && !coursesView.view.groupCollapse.includes(thePanel.hash.replace("#", ""))) {
+            coursesView.view.groupCollapse += thePanel.hash.replace("#", "") + ",";
+         }
+
+         // Remove last comma
+         if (coursesView.view.groupCollapse !== "") {
+            coursesView.view.groupCollapse = coursesView.view.groupCollapse.substring(0, coursesView.view.groupCollapse.length - 1);
+         }
+
+         //TODO: add token
+         if (studentId == undefined) {
+            $.ajax({
+               url: "/Profile/UpdateMyCoursesView",
+               type: "POST",
+               data: { coursesView: JSON.stringify(coursesView) },
+               error: function(xhr, ajaxOptions, thrownError) {
+                  alert("Failed to set my courses view.");
+               }
+            });
+         }
+      }
+   },500);
+}
+
+function SortOrGroupEnrolledCourses(theCheckBox, courses) {
+
+   var orderOptions  = $("input[class='sEnrolledFilter']");
+   var optionsToSend = "";
+   var i              = 0;
+   var course         = undefined;
+   var enrolledCourse = undefined;
+   var coursesSorted  = undefined;
+
+   // Use javascript for the sorting and grouping since we already fetched the data
+   if (theCheckBox != undefined) {
+      for (i = 0; i < orderOptions.length; i++) {
+         if (orderOptions[i].checked === true) {
+            if (orderOptions[i].id === theCheckBox.id || (theCheckBox.id.includes("group") && orderOptions[i].id.includes("by"))) {
+               optionsToSend += $(orderOptions[i]).attr("name") + ",";
+            } else {
+               orderOptions[i].checked = false;
+            }
+         } else {
+            orderOptions[i].checked = false;
+         }
+      }
+   }
+
+   // Only one sorting selection is enabled
+   if (optionsToSend.includes("by-alphabet")) {
+      coursesSorted = courses.sort(function (a, b) {
+         var titleA = a.title.toUpperCase();
+         var titleB = b.title.toUpperCase();
+
+         if (titleA < titleB) {
+            return -1;
+         }
+         if (titleA > titleB) {
+            return 1;
+         }
+         // they are equal
+         return 0;
+      });
+   }
+   else if (optionsToSend.includes("by-date")) {
+      coursesSorted = courses.sort(function (a, b) {
+         if (a.tableName === "udemy" || b.tableName === "udemy") {
+            return 1;
+         } else if (a.endDate != null && b.endDate != null) {
+            if (a.endDate < b.endDate) {
+               return -1;
+            } else if (a.endDate > b.endDate) {
+               return 1;
+            } else {
+               return 0;
+            }
+         } else {
+            return 0;
+         }
+      });
+      coursesSorted = coursesSorted.sort(function (a, b) {
+         if (a.tableName === "udemy" || b.tableName === "udemy") {
+            return 1;
+         } else if (a.startDate != null && b.startDate != null) {
+            if (a.startDate < b.startDate) {
+               return -1;
+            } else if (a.startDate > b.startDate) {
+               return 1;
+            } else {
+               return 0;
+            }
+         }
+         else {
+            return 0;
+         }
+      });
+   }
+   else if (optionsToSend.includes("by-progress")) {
+      coursesSorted = courses.sort(function (a, b) {
+         return b.progress - a.progress;
+      });
+   }
+   else {
+      coursesSorted = courses;
+   }
+
+   var enrolledTitleNum  = -1;
+   var enrolledCourseStr = "";
+
+   // Group the sorted (if any sorting) courses by the selected option
+   if (optionsToSend.includes("group")) {
+
+      var groupBy = function(xs, key) {
+         return xs.reduce(function(rv, x) {
+               (rv[x[key]] = rv[x[key]] || []).push(x);
+               return rv;
+            },
+            {});
+      };
+
+      var unorderedGroup = undefined;
+      var orderedGroup   = undefined;
+
+      // Group by Categories/Completion/Provider
+      if (optionsToSend.includes("completion")) {
+         coursesSorted  = groupBy(coursesSorted, 'progressStatus');
+         orderedGroup   = {};
+         unorderedGroup = coursesSorted;
+         coursesSorted  = {};
+         
+         // Establish an specific order for this group
+         if (unorderedGroup["In Progress"] != undefined) {
+            orderedGroup["In Progress"] = unorderedGroup["In Progress"];
+         }
+         if (unorderedGroup["Start"] != undefined) {
+            orderedGroup["Start"] = unorderedGroup["Start"];
+         }
+         if (unorderedGroup["Completed"] != undefined) {
+            orderedGroup["Completed"] = unorderedGroup["Completed"];
+         }
+         Object.keys(orderedGroup)
+            .forEach(function (key) {
+               coursesSorted[key] = orderedGroup[key];
+         });
+      } 
+      else {
+         if (optionsToSend.includes("category")) {
+         coursesSorted = groupBy(coursesSorted, "category");
+         } else if (optionsToSend.includes("provider")) {
+            coursesSorted = groupBy(coursesSorted, "tableName");
+         }
+         orderedGroup   = {}
+         unorderedGroup = coursesSorted;
+         coursesSorted  = undefined;
+
+         Object.keys(unorderedGroup).sort()
+            .forEach(function(key) {
+               orderedGroup[key] = unorderedGroup[key];
+         });
+         coursesSorted = orderedGroup;
+      }
+
+      for (var group in coursesSorted) {
+
+         if (coursesSorted.hasOwnProperty(group)) {
+
+            var theGroup     = group.charAt(0).toUpperCase() + group.slice(1);
+            var theGroupName = theGroup;
+            theGroup = theGroup.replace(/ /g, "-");
+            theGroup = theGroup.replace(/&/g, "-");
+            theGroup = theGroup.replace(/,/g, "");
+            theGroup = theGroup.replace("--", "-");
+
+            enrolledCourseStr +=
+               '<div id="panel' + theGroup + '" role="tablist" aria-multiselectable="true" class="panel-group">';
+
+            enrolledCourseStr +=
+               '<div class="panel panel-default">' +
+                  '<a data-toggle="collapse" data-parent="#panel' + theGroup + '" class="link-unstyled" ' +
+                  'href="#' + theGroup + '-Group" aria-expanded="true" aria-controls="' + theGroup + '-Group" onclick="SetMyCoursesView(this);" >' +
+                  '<div id="heading' + theGroup + '" role="tab" class="panel-heading">' +
+                  '<h4 class="panel-title">' + theGroupName + '</h4></div></a>' +
+                  '<div id="' + theGroup + '-Group" role="tabpanel" aria-labeledby="heading' + theGroup + '" class="panel-collapse collapse">' +
+                  '<div class="panel-body">';
+
+            for (course in coursesSorted[group]) {
+
+               if (coursesSorted[group].hasOwnProperty(course)) {
+
+                  enrolledCourse = SetEnrolledCourseString(
+                     enrolledTitleNum,
+                     enrolledCourseStr,
+                     coursesSorted[group].length,
+                     coursesSorted[group][course]);
+
+                  enrolledTitleNum  = enrolledCourse.EnrolledTitleNum;
+                  enrolledCourseStr = enrolledCourse.EnrolledCourseStr;
+               }
+            }
+
+            enrolledCourseStr += "</div></div></div></div>";
+            enrolledTitleNum  = -1;
+         }
+      }
+   }
+   // Just display the sorted courses
+   else {
+      for (course in coursesSorted) {
+
+         if (coursesSorted.hasOwnProperty(course)) {
+
+            enrolledCourse = SetEnrolledCourseString(
+               enrolledTitleNum,
+               enrolledCourseStr,
+               coursesSorted.length,
+               coursesSorted[course]);
+
+            enrolledTitleNum  = enrolledCourse.EnrolledTitleNum;
+            enrolledCourseStr = enrolledCourse.EnrolledCourseStr;
+         }
+      }
+   }
+
+   $("#enrollContent").html(enrolledCourseStr);
+}
+
+// This function is being called by SignalR via refreshEnrolledCourses()
+function GetExternalCourses() {
+   
+   var urlnew = "";
+
+   if (studentId != undefined) {
+      urlnew = "/Profile/GetMOOCAccounts?studentId=" + studentId;
+   } else {
+      urlnew = "/Profile/GetMOOCAccounts?studentId=undefined";
+   }
+
+   // Retrieve the accounts information
+   $.ajax({
+      cache: false,
+      async: false,
+      type: "GET",
+      url: urlnew,
+      beforeSend: function () {
+         $("#enrollContent").empty();
+         $("#enrolled-courses-list").hide();
+         $("#no-enrolled-courses").hide();
+         $("#enrolled-courses-loading").show();
+      },
+      success: function (data) {
+
+         syncInProcess = data.Processing;
+         accountsValid = data.AccValid;
+         hasSyncAcc    = data.HasSyncAcc;
+
+         $("#enrolled-courses-loading").hide();
+         
+         // Let the user update the credentials after 3 minutes (max) had elapsed
+         // unless the script finishes first
+         if (hasSyncAcc) {
+            if (!syncInProcess && !accountsValid) {
+               $("#no-enrolled-courses").hide();
+               $("#sync-in-progress").hide();
+               $("#sync-alert").show();
+            } else if (syncInProcess) {
+               $("#sync-in-progress").show();
+            } else {
+               $("#sync-alert").hide();
+               $("#sync-courses").removeAttr("disabled");
+            }
+         }
+
+         if (!data.HasEnrolled && !syncInProcess && accountsValid) {
+            $("#no-enrolled-courses").show();
+         }
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+         alert("Failed to retrieve MOOC account information.");
+      }
+   });
+
+   if (!syncInProcess) {
+      GetEnrolledCourses(undefined, true);
+   }
+}
+
+function GetEnrolledCourses(theCheckBox, synced) {
+
+   // TODO: need to fetch it from the server when synchronize
+   if (synced || coursesData == undefined || coursesData === "null") {
+
+      var urlnew = "";
+
+      if (studentId != undefined) {
+         urlnew = "/Profile/GetEnrolledCourses?studentId=" + studentId;
+      } else {
+         urlnew = "/Profile/GetEnrolledCourses?studentId=undefined";
+      }
+
+      $.ajax({
+         url: urlnew,
+         type: "GET",
+         cache: false,
+         async: false,
+         beforeSend: function() {
+            $("#enrollContent").empty();
+            $("#enrolled-courses-list").hide();
+            $("#enrolled-courses-loading").show();
+         },
+         success: function (data) {
+            if (data != undefined && data !== "[]") {
+               coursesData = eval(data);
+               $("#no-enrolled-courses").hide();
+               SortOrGroupEnrolledCourses(theCheckBox, coursesData);
+               GetMyCoursesView();
+            }
+            $("#enrolled-courses-loading").hide();
+            $("#enrolled-courses-list").show();
+         },
+         error: function (xhr, ajaxOptions, thrownError) {
+            alert("Failed to retrieve enrolled courses.");
+         }
+      });
+
+   } else {
+
+      $("#enrollContent").empty();
+
+      SortOrGroupEnrolledCourses(theCheckBox, coursesData);
+
+      if (!loadingCoursesView) {
+         SetMyCoursesView();
+      }
+   }
+}
+
+function GetMyCoursesView() {
+
+   var urlnew = "";
+
+   if (studentId != undefined) {
+      urlnew = "/Profile/GetMyCoursesView?studentId=" + studentId;
+   } else {
+      urlnew = "/Profile/GetMyCoursesView?studentId=undefined";
+   }
+
+   $.ajax({
+      url: urlnew,
+      type: "GET",
+      cache: false,
+      //async: false,
+      success: function (data) {
+
+         $("#sync-in-progress").hide();
+
+         if (data != undefined && data !== "null") {
+            coursesView = JSON.parse(data);
+
+            if (coursesView.view.sortBy !== "") {
+               $("#" + coursesView.view.sortBy).click();
+            }
+            if (coursesView.view.groupBy !== "") {
+               $("#" + coursesView.view.groupBy).click();
+            }
+            if (coursesView.view.groupCollapse !== "") {
+               var groups = coursesView.view.groupCollapse.split(',');
+               for (var i = 0; i < groups.length; i++) {
+                  $('a[href="' + "#" + groups[i] + '"]').click();
+               }
+            }
+         }
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+         alert("Failed to retrieve courses view.");
+      }
+   });
+
+   loadingCoursesView = false;
+}
+
+function SynchronizeCourses() {
+
+   var urlnew = "/Profile/SynchronizeCourses";
+
+   //if (studentId != undefined) {
+   //   urlnew = "/Profile/SynchronizeCourses?studentId=" + studentId;
+   //} else {
+   //   urlnew = "/Profile/SynchronizeCourses?studentId=undefined";
+   //}
+
+   if (hasSyncAcc && !syncInProcess && accountsValid) {
+      $.ajax({
+         type: "POST",
+         cache: false,
+         url: urlnew,
+         beforeSend: function () {
+            $("#enrollContent").empty();
+            $("#enrolled-courses-list").hide();
+            $("#no-enrolled-courses").hide();
+            $("#enrolled-courses-loading").show();
+            syncInProcess = true;
+         },
+         success: function () {
+            $("#enrolled-courses-loading").hide();
+            $("#sync-in-progress").show();
+         },
+         error: function (xhr, ajaxOptions, thrownError) {
+            alert("Failed to synchronize :(.");
+         }
+      });
+   } else {
+      return false;
+   }
+   return true;
+}
+
+//function FilterCourses(theCheckBox) {
+
+//   var filterOptions = $("input[class='sCoursesFilter']");
+//   var optionsToSend = "";
+//   var i              = 0;
+//   var course         = undefined;
+//   var enrolledCourse = undefined;
+//   var coursesSorted  = undefined;
+
+//   // Use javascript for the sorting and grouping since we already fetched the data
+//   if (theCheckBox != undefined) {
+//      for (i = 0; i < filterOptions.length; i++) {
+//         if (filterOptions[i].checked === true) {
+//            if (filterOptions[i].id === theCheckBox.id) { //|| (theCheckBox.id.includes("level"))) {
+//               optionsToSend += $(filterOptions[i]).attr("name") + ",";
+//            } else {
+//               filterOptions[i].checked = false;
+//            }
+//         } else {
+//            filterOptions[i].checked = false;
+//         }
+//      }
+//   }
+//}
+
+//function RaisePageNum(pgN, row_id) {
+
+//    var patterns            = $("#pattern").val(); // By default its Thumb; TODO: will like to have a 'table like vertical list display'
+//    var categoryList        = document.getElementsByClassName("sCategoryInfo active");
+//    var categoriesToSend    = "";
+//    var moocList            = document.getElementsByClassName("sMOOCInfo active");
+//    var moocsToSend         = "";
+//    var programList         = document.getElementsByClassName("sProgramInfo active");
+//    var programTypesToSend = "";
+
+//    var courseSearch        = document.getElementsByName("searchCourse");
+//    ///var coursesByInstructor = document.getElementById("courses-by-instructor");
+//    //var coursesByPartner    = document.getElementById("courses-by-partner");
+//    var urlnew              = "";
+
+//    if (row_id !== undefined && row_id !== null) {
+
+//        var row          = document.getElementById(row_id);
+//        var theClassName = "";
+
+//        if (row_id.toString().startsWith("mooc")) {
+//            theClassName = "sMOOCInfo";   
+//        }
+//        else if (row_id.toString().startsWith("program")) {
+//            theClassName = "list-group-item-program sProgramInfo";
+//        }
+//        else {
+//            theClassName = "sCategoryInfo";
+//        }
+
+//        if (row.classList.contains("active")) {
+//           row.className = "list-group-item " + theClassName;
+//        } else {
+//           if (row_id.toString().endsWith("specialization")) {
+//              // De-activate audit selection 
+//              document.getElementById("program-audit").className = "list-group-item " + theClassName;
+//           }
+//           else if (row_id.toString().endsWith("audit")) {
+//              // De-activate specialization selection 
+//              document.getElementById("program-specialization").className = "list-group-item " + theClassName;
+//           }
+
+//           row.className += " active";
+//        }
+//    }
+
+//    var i = 0;
+
+//    for (i = 0; i < categoryList.length; i++) {
+//        if (categoryList[i].classList.contains("active")) {
+//           categoriesToSend += $(categoryList[i]).attr("name") + ",";
+//        }
+//    }
+
+//    for (i = 0; i < moocList.length; i++) {
+//       if (moocList[i].classList.contains("active")) {
+//          var str = $(moocList[i]).attr("name");
+//          moocsToSend += str.charAt(0).toUpperCase() + str.slice(1) + ",";
+//        }
+//    }
+
+//    for (i = 0; i < programList.length; i++) {
+//        if (programList[i].classList.contains("active")) {
+//            programTypesToSend += $(programList[i]).attr("name") + ",";
+//        }
+//    }
+
+//    categoriesToSend   = categoriesToSend.substring(0, categoriesToSend.length - 1);
+//    moocsToSend        = moocsToSend.substring(0, moocsToSend.length - 1);
+//    programTypesToSend = programTypesToSend.substring(0, programTypesToSend.length - 1);
+
+//    // string course, string category = null, string mooc = null, string program = null
+
+//    if (courseSearch[0].value !== "") {
+//       urlnew = "/Courses/CourseSearch?pgn=" + pgN + "&course=" + courseSearch[0].value.toLowerCase();
+
+//       $("#courses-list-header")[0].innerHTML = "Search Results for '" + courseSearch[0] + "'";
+
+//    } else {
+//       urlnew = "/Courses/PaginationInfo?pgn=" + pgN + "&pattern=" + patterns;
+
+//       if (categoriesToSend.trim() !== "") {
+//          urlnew += "&category=" + categoriesToSend;
+//       }
+//    }
+
+//    if (moocsToSend.trim() !== "") {
+//       urlnew += "&mooc=" + moocsToSend;
+//    }
+
+//    if (programTypesToSend.trim() !== "") {
+//       urlnew += "&program=" + programTypesToSend;
+//    }
+
+//    $("#pgN").val(pgN);
+
+//    var dataRecv = undefined;
+
+//    $.ajax({
+//        cache: false,
+//        type: "GET",
+//        url: urlnew,
+//        success: function (data) {
+//            dataRecv = data;
+//        },
+//        error: function (xhr, ajaxOptions, thrownError) {
+//            alert("Failed to retrieve the courses requested.");
+//        },
+//        beforeSend: function () {
+//            $("#content").empty();
+
+//            if ($("#list-courses").is(":visible") === false) {
+//               $("#filterCourses").show();
+//               $("#adv-search").show();
+//               $("#list-courses").show();
+//               $("#recommended-list").hide();
+//           }
+
+//           // Update header
+//           if (moocsToSend.trim() === "") {
+//              $("#courses-list-header")[0].innerHTML = "Search Results";
+//           } else {
+//              $("#courses-list-header")[0].innerHTML = "Search Results - " + moocsToSend;
+//           }
+
+//           $("#courses-list").hide();
+//           $("#courses-loading").show();
+//        },
+//        complete: function () {
+//            $("#courses-loading").hide();
+//            $("#courses-list").show();
+            
+//            if (dataRecv === undefined || dataRecv.indexOf("panel-courses") === -1) {
+//               $("#content").html('<p class="ml-lg">No courses were found with the selected settings :( ...</p>');
+//            } else {
+//               $("#content").html(dataRecv);
+//            }
+//        }
+//    });
+//}
+
+//function RaisePrograms(pgN) {
+
+//   var patterns           = $("#pattern").val(); // By default its Thumb; will like to have a 'table list display'
+//   var programList        = document.getElementsByClassName("sProgramInfo active");
+//   var programTypesToSend = "";
+
+//   for (var i = 0; i < programList.length; i++) {
+//      if (programList[i].classList.contains("active")) {
+//         programTypesToSend += $(programList[i]).attr("name") + ",";
+//      }
+//   }
+
+//   programTypesToSend = programTypesToSend.substring(0, programTypesToSend.length - 1);
+
+//   var urlnew = "/Courses/PaginationInfo?pgn=" + pgN + "&pattern=" + patterns;
+
+//   if (programTypesToSend.trim() !== "") {
+//      urlnew += "&program=" + programTypesToSend;
+//   }
+
+//   $("#pgN").val(pgN);
+
+//   var dataRecv = undefined;
+
+//   $.ajax({
+//      cache: false,
+//      type: "GET",
+//      url: urlnew,
+//      success: function (data) {
+//         dataRecv = data;
+//      },
+//      error: function (xhr, ajaxOptions, thrownError) {
+//         alert("Failed to retrieve the courses requested.");
+//      },
+//      beforeSend: function () {
+//         $("#content").empty();
+
+//         if ($("#list-courses").is(":visible") === false) {
+//            $("#filterCourses").show();
+//            $("#adv-search").show();
+//            $("#list-courses").show();
+//            $("#recommended-list").hide();
+//         }
+
+//         $("#courses-list").hide();
+//         $("#courses-loading").show();
+//      },
+//      complete: function () {
+//         $("#courses-loading").hide();
+//         $("#courses-list").show();
+         
+//         if (dataRecv === undefined || dataRecv.indexOf("panel-courses") === -1) {
+//            $("#content").html('<p class="ml-lg">No courses were found with the selected settings :( ...</p>');
+//         } else {
+//            $("#content").html(dataRecv);
+//         }
+//      }
+//   });
+//}
+
+//// Go to page 1 when user selects a category
+//function RaiseCategory(row_id) {
+//    $("#pgN").val(1);
+//    RaisePageNum($("#pgN").val(), row_id);
+//}
+
+//function RaiseMOOC(mooc) {
+//    $("#pgN").val(1);
+//    RaisePageNum($("#pgN").val(), mooc);
+//}
+
+//function RaiseProgram(program) {
+//    $("#pgN").val(1);
+//    RaisePageNum($("#pgN").val(), program);
+//}

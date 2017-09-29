@@ -1,0 +1,170 @@
+﻿
+$(document).ready(function() {
+
+    var courseId        = undefined;
+    var courseTableName = undefined;
+    var courseUrl       = undefined;
+
+    $("#share-course").on("show.bs.modal", function(e) {
+        courseId        = $(e.relatedTarget).data("course-id");
+        courseTableName = $(e.relatedTarget).data("course-tablename");
+        courseUrl       = $(e.relatedTarget).data("course-url");
+        var courseTitle = $(e.relatedTarget).data("course-title");
+        var courseImage = $(e.relatedTarget).data("course-img");
+        $('div[id="course-img"]').css("background-image", "url(" + courseImage + ")");
+        $(e.currentTarget).find('span[id="course-title"]')[0].innerHTML = courseTitle;
+    });
+
+    $("#share-course").on("hide.bs.modal", function (e) {
+
+        try {
+            // Clear inputs
+            $("#shareMessage").val("");
+            msContacts.clear();
+        } catch (err) {
+            $(".ms-contact-input").val("");
+        }
+
+    });
+
+    var initContactsMagicSuggest = function () {
+
+        $.ajax({
+            url: "/Profile/GetMatchingUser",
+            type: "POST",
+            cache: false,
+            dataType: "json",
+            success: function (recv) {
+                msContacts = $("#ms-contacts")
+                    .magicSuggest({
+                        placeholder: "User Name or Email",
+                        data: recv,
+                        valueField: "id",
+                        displayField: "label",
+                        renderer: function (recv) {
+
+                            var htmlString =
+                                '<div style="padding: 5px; overflow:hidden;">' +
+                                    '<div style="float: left;"><img src="' +
+                                    recv.image +
+                                    '" class="mt-sm img-circle thumb32"/></div>' +
+                                    '<div style="float: left; margin-left: 5px">' +
+                                    '<div style="font-weight: bold; color: #333; font-size: 11px; line-height: 11px">' +
+                                    recv.label +
+                                    "</div>" +
+                                    '<div style="color: #999; font-size: 10px">' +
+                                    recv.description +
+                                    "</div>" +
+                                    "</div>" +
+                                    '</div><div style="clear:both;"></div>'; // make sure we have closed our dom stuff
+
+                            return htmlString;
+
+                        },
+                        resultAsString: true,
+                        resultAsStringDelimiter: " ",
+                        allowFreeEntries: true,
+                        maxEntryLength: 24,
+                        highlight: false,
+                        //mode: 'remote', // this allows to perform external queries
+                        maxDropHeight: 145,
+                        maxSuggestions: 5,
+                        maxSelection: 3,
+                        minChars: 2,
+                        useTabKey: true,
+                        useCommaKey: true,
+                        required: true,
+                        vtype: "alpha, email",
+                    selectionRenderer: function (recv) {
+
+                        var htmlString = undefined;
+
+                        if (recv.image == null) {
+                            htmlString =
+                                '<div style="overflow:hidden;height:35px;">' +
+                                    '<div style="float: left;"></div>' +
+                                    '<div style="float: left;margin-top: 10px; margin-left: 5px;display:inline-block;">' +
+                                    '<span style="color: #333; font-size: 11px;">' +
+                                    recv.label +
+                                    "</span>" +
+                                    "</div>" +
+                                    '<input type="hidden" class="contact-email" value="' +
+                                    recv.label +
+                                    '" />' +
+                                '</div><div style="clear:both;"></div>'; // make sure we have closed our dom stuff
+                        } else {
+                            htmlString =
+                                '<div style="overflow:hidden;height:35px;">' +
+                                   '<div style="float: left;"><img src="' + recv.image + '" class="mt-sm img-circle thumb32"/></div>' +
+                                   '<div style="float: left;margin-top: 10px; margin-left: 5px;display:inline-block;">' +
+                                       '<span style="color: #333; font-size: 11px;">' + recv.label + "</span>" +
+                                   "</div>" +
+                                   '<input type="hidden" class="contact-email" value="' + recv.email + '" />' +
+                               '</div><div style="clear:both;"></div>'; // make sure we have closed our dom stuff   
+                        }
+
+                        return htmlString;
+
+                    }
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //alert('Failed to retrieve contact list.');
+            }
+        });
+
+    }
+
+    function validateShareForm() {
+
+        var selText          = document.getElementsByClassName("contact-email");
+        var selectedContacts = "";
+
+        if (selText.length > 0) {
+            for (var i = 0; i < selText.length; i++) {
+                if (selText[i].value != "undefined")
+                    selectedContacts += selText[i].value + ",";
+            }
+
+            // Remove last comma
+            selectedContacts = selectedContacts.substring(0, selectedContacts.length - 1);
+
+            $.ajax({
+                url: "/Courses/ShareCourse",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    courseId: courseId,
+                    tableName: courseTableName,
+                    courseUrl: courseUrl,
+                    contacts: selectedContacts,
+                    message: $("#shareMessage").val()
+                },
+                success: function(recv) {
+                    // Open Sweet alert
+                    $("#share-course").modal("hide");
+                    swal("Message Sent", "Thanks, keep up with sharing knowledge!", "success");
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert("Something went wrong.");
+                }
+            });
+        } else {
+            $("#shareMessageButton").attr("disabled", true);
+        }
+
+    };
+
+    document.getElementById("shareMessageButton").addEventListener("click", validateShareForm);
+
+    initContactsMagicSuggest();
+
+    $("#shareMessageButton").attr("disabled", true);
+    $("#shareMessage").keyup(function () {
+        if ($(this).val().length != 0)
+            $("#shareMessageButton").attr("disabled", false);
+        else
+            $("#shareMessageButton").attr("disabled", true);
+    });
+
+});

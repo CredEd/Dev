@@ -1,0 +1,260 @@
+
+
+// set the pdfjs worker source
+//PDFJS.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.6.377/pdf.worker.js';
+
+// check for necessary features
+featureCheck();
+
+
+function displayPDFForGallery (pdfFile, divId, galleryName, titleText, footerText, imgClass)
+{
+    PDFJS.getDocument(pdfFile)
+        .then(function(pdf) {
+
+            pdf.getPage(1).then(function(page) {
+
+                    var viewport = page.getViewport(0.8);
+                    // PDF.js returns a promise when it gets a particular page from the pdf object
+                    // A canvas element is used to render the page and convert into an image thumbnail
+                    // if single canvas is used, the content gets overridden when PDF.js promises resolve for subsequent files
+                    // so a dedicated canvas element is created for rendering a thumbnail for each pdf
+                    // the canvas element is discarded once the thumbnail is created.
+                    var canvas = document.createElement('canvas');
+                    var ctx    = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width  = viewport.width;
+
+                    var renderContext = {
+                        canvasContext: ctx,
+                        viewport: viewport
+                    };
+
+                    page.render(renderContext).then(function() {
+
+                            //set to draw behind current content
+                            ctx.globalCompositeOperation = "destination-over";
+                            //set background color
+                            ctx.fillStyle = "#fff";
+                            //draw on entire canvas
+                            ctx.fillRect(0, 0, canvas.width, canvas.height);
+                            // create an img from the canvas which contains the page contents
+                            var img_src = canvas.toDataURL();
+                            var $img = $("<img>")
+                                .attr("src", img_src)
+                                .attr("class", "center-block img-thumbnail " + imgClass);
+
+                            // var $thumb = $("<div>")
+                                // .attr("data-pdf-details", JSON.stringify(file_details))
+                                // // .append(
+                                    // // $("<span>")
+                                    // // .attr("class", 'close')
+                                    // // .html('&times;')
+                                // // )
+                                // // .append($("<div>").attr("class", 'info').text(pdf_file))
+                                // .append($img);
+
+                            var $thumb = $("<a>")
+                                .attr("href", img_src)
+                                .attr("data-toggle", "lightbox")
+                                .attr("data-gallery", galleryName)
+                                .attr("data-title", titleText)
+                                .attr("data-footer", footerText)
+                                .append($img);
+
+
+                            $thumb.appendTo("#" + divId);
+                            // we have created a thumbnail and rendered the img from the canvas
+                            // discard the temporary canvas created for rendering this thumbnail
+                            //canvas.remove();
+                            $(canvas).remove();
+
+                        });
+
+                }); // end of getPage
+
+        }); // end of getDocument
+}
+
+function displayPDF(pdfFile, divId) {
+
+    PDFJS.getDocument(pdfFile).then(function (pdf) {
+
+            pdf.getPage(1).then(function (page) {
+
+                var viewport = page.getViewport(0.8);
+                // PDF.js returns a promise when it gets a particular page from the pdf object
+                // A canvas element is used to render the page and convert into an image thumbnail
+                // if single canvas is used, the content gets overridden when PDF.js promises resolve for subsequent files
+                // so a dedicated canvas element is created for rendering a thumbnail for each pdf
+                // the canvas element is discarded once the thumbnail is created.
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                var renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+
+                page.render(renderContext).then(function () {
+
+                    //set to draw behind current content
+                    ctx.globalCompositeOperation = "destination-over";
+                    //set background color
+                    ctx.fillStyle = "#fff";
+                    //draw on entire canvas
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    // create an img from the canvas which contains the page contents
+                    var img_src = canvas.toDataURL();
+                    var $img = $("<img>")
+                        .attr("src", img_src)
+                        .attr("class", "img-responsive center-block img-thumbnail")
+                        .attr("style", "border-radius: 4px;");
+
+                    // var file_details = {
+                        // "name": pdfFile,
+                        // "pages": pdf.pdfInfo.numPages
+                    // };
+
+                     var $thumb = $("<div>")
+                     //.attr("data-pdf-details", JSON.stringify(file_details))
+                     // .append(
+                     // $("<span>")
+                     // .attr("class", 'close')
+                     // .html('&times;')
+                     // )
+                     // .append($("<div>").attr("class", 'info').text(pdf_file))
+                     .append($img);
+
+                    $thumb.appendTo("#" + divId);
+                    // we have created a thumbnail and rendered the img from the canvas
+                    // discard the temporary canvas created for rendering this thumbnail
+                    //canvas.remove();
+                    $(canvas).remove();
+
+                });
+
+            }); // end of getPage
+
+        }); // end of getDocument
+}
+
+function previewPDFFile(pdfFile, divId) {
+
+    function convertDataURIToBinary(dataURI) {
+
+        var BASE64_MARKER = ';base64,';
+        var base64Index   = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+        var base64        = dataURI.substring(base64Index);
+        var raw           = window.atob(base64);
+        var rawLength     = raw.length;
+        var array         = new Uint8Array(new ArrayBuffer(rawLength));
+
+        for (var i = 0; i < rawLength; i++) {
+            array[i] = raw.charCodeAt(i);
+        }
+        return array;
+    }
+
+    // Fetch the PDF document from the URL using promises
+    var pdfAsArray = convertDataURIToBinary(pdfFile);
+
+    PDFJS.getDocument(pdfAsArray).then(function (pdf) {
+        // Using promise to fetch the page
+        pdf.getPage(1).then(function (page) {
+            var scale    = 0.4;
+            var viewport = page.getViewport(scale);
+            // Prepare canvas using PDF page dimensions
+            var canvas  = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width  = viewport.width;
+            // Render PDF page into canvas context
+            var renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+
+            page.render(renderContext).then(function () {
+
+                //set to draw behind current content
+                ctx.globalCompositeOperation = "destination-over";
+                //set background color
+                ctx.fillStyle = "#fff";
+                //draw on entire canvas
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                // create an img from the canvas which contains the page contents
+                var img_src = canvas.toDataURL();
+                var $img = $("<img>")
+                    .attr("src", img_src)
+                    .attr("class", "img-responsive center-block img-thumbnail")
+                    .attr("style", "border-radius: 4px;");
+
+                // var file_details = {
+                // "name": pdfFile,
+                // "pages": pdf.pdfInfo.numPages
+                // };
+
+                var $thumb = $("<div>")
+                //.attr("data-pdf-details", JSON.stringify(file_details))
+                // .append(
+                // $("<span>")
+                // .attr("class", 'close')
+                // .html('&times;')
+                // )
+                // .append($("<div>").attr("class", 'info').text(pdf_file))
+                .append($img);
+
+                $thumb.appendTo("#" + divId);
+                // we have created a thumbnail and rendered the img from the canvas
+                // discard the temporary canvas created for rendering this thumbnail
+                //canvas.remove();
+                $(canvas).remove();
+
+            });
+        });
+    });  
+}
+
+function featureCheck () {
+  // feature list required for this
+  var features       = ['webworkers', 'canvas'];
+  var featuresAbsent = false;
+  var $list          = $("<ul>").attr("id", "feature_list");
+
+  $.each( features, function (index, feature) {
+      if (Modernizr[feature]) {
+          //console.log("SUCCESS: " + feature + " present");
+          var $li = $("<li>")
+              .css({
+                "border": "thin solid black",
+                "padding": "5px",
+                "margin": "5px",
+                "width": "auto",
+                "background": "lightgreen"
+            })
+            .text("SUCCESS: " + feature + " present");
+          $list.append($li);
+      } else {
+          // necessary feature is not present
+          featuresAbsent = true;
+          console.log("FAILURE: " + feature + " NOT present");
+          var $li = $("<li>")
+                        .css({
+                          "border": "thin solid black",
+                          "padding": "5px",
+                          "margin": "5px",
+                          "width": "auto",
+                          "background": "red"
+                        })
+                        .text("FAILURE: " + feature + " NOT present");
+          $list.append($li);
+      }
+  } );
+  // append the feature list if any of the feature is not present
+  if (featuresAbsent) {
+      $(document.body).append($list);
+  }
+}

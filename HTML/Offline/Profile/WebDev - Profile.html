@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)http://localhost:62825/Profile -->
+<html lang="en" style="" class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="WebDev Courses">
+    <title>WebDev - Profile</title>
+    <!-- =============== VENDOR STYLES ===============-->
+    <link href="./WebDev - Profile_files/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./WebDev - Profile_files/simple-line-icons.min.css" rel="stylesheet">
+
+    <link href="./WebDev - Profile_files/animate.min.css" rel="stylesheet">
+
+    <link href="./WebDev - Profile_files/whirl.min.css" rel="stylesheet">
+
+    <link href="./WebDev - Profile_files/bootstrap-tour-standalone.css" rel="stylesheet">
+
+    <!-- =============== PAGE VENDOR STYLES =============== -->
+    <!-- =============== BOOTSTRAP STYLES ===============-->
+    <link href="./WebDev - Profile_files/bootstrap.min.css" rel="stylesheet" type="text/css" id="bscss">
+    <!-- =============== APP STYLES ===============-->
+    <link href="./WebDev - Profile_files/app.css" rel="stylesheet" type="text/css" id="maincss">
+    <link href="./WebDev - Profile_files/mvc-override.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- jQuery -->
+    <script src="./WebDev - Profile_files/modernizr-2.6.2.js.download"></script>
+    <script src="./WebDev - Profile_files/modernizr-2.8.3.js.download"></script>
+
+    <script src="./WebDev - Profile_files/jquery-3.1.1.js.download"></script>
+
+    <script src="./WebDev - Profile_files/bootstrap.min.js.download"></script>
+    <script src="./WebDev - Profile_files/bootstrap-select.min.js.download"></script>
+
+    <script src="./WebDev - Profile_files/bootstrap-tour-standalone.js.download"></script>
+
+    <!--#if !(FIREFOX || MOZCENTRAL || CHROME)-->
+    <script src="./WebDev - Profile_files/compatibility.js.download"></script>
+    <!--#endif-->
+    <script src="./WebDev - Profile_files/pdf.js.download"></script>
+
+    <script type="text/javascript">
+        PDFJS.workerSrc = '/Vendor/pdf.js/build/pdf.worker.js';
+    </script>
+    
+    <script src="./WebDev - Profile_files/pdf-thumbnail.js.download"></script>    
+
+</head>
+
+<body id="body-layout" data-target=".navbar" class="vsc-initialized">
+    <div class="wrapper no-sidebar">
+        <!-- top navbar-->
+        <header class="topnavbar-wrapper">
+            
+
+<!-- START Top Navbar-->
+<nav class="navbar topnavbar navbar-fixed-top">
+   <!-- START navbar header-->
+   <div class="navbar-header">
+      <a href="http://localhost:62825/Profile" class="navbar-brand">
+         <div class="brand-logo">
+            <img src="./WebDev - Profile_files/logo.png" alt="WebDev Logo" class="img-responsive">
+         </div>
+         <div class="brand-logo-collapsed">
+             <img src="./WebDev - Profile_files/logo-layout.png" alt="WebDev Logo" class="img-responsive">
+         </div>
+      </a>
+   </div>
+   <!-- END navbar header-->
+   <!-- START Nav wrapper-->
+   <div class="nav-wrapper">
+      <!-- START Right Navbar-->
+      <ul class="nav navbar-nav navbar-right">
+         <!-- START Header buttons -->
+          <li>
+              <a href="http://localhost:62825/Profile">
+                  <em class="icon-home"></em>
+              </a>
+          </li>
+          <li>
+              <a href="#" data-toggle-state="offsidebar-open" data-no-persist="true">
+                  <em class="icon-people"></em>
+              </a>
+          </li>           
+               <!-- START Alert menu-->
+               <li class="dropdown dropdown-list">
+                  <a id="notifications-bell" href="#" data-toggle="dropdown">
+                     <em class="icon-bell"></em>
+                     <div id="alert-notification" class="label label-danger" style="display: none;"></div>
+                  </a>
+                  <!-- START Dropdown menu-->
+                  <ul class="dropdown-menu animated fadeIn">
+                     <li>
+                        <!-- START list group-->
+                        <div class="list-group">
+                              <!-- list item-->
+                              <a href="#" class="list-group-item">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-envelope fa-2x text-warning"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">New Messages</p>
+                                       <p class="m0 text-muted">
+                                          <small id="messages-notification">0 new messages</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                           <!-- list item-->
+                           <a href="#" class="list-group-item">
+                              <div class="media-box">
+                                 <div class="pull-left">
+                                    <em class="fa fa-tasks fa-2x text-success"></em>
+                                 </div>
+                                 <div class="media-box-body clearfix">
+                                    <p class="m0">Bot Tasks</p>
+                                    <p class="m0 text-muted">
+                                       <small id="tasks-notification">0 new tasks</small>
+                                    </p>
+                                 </div>
+                              </div>
+                           </a>
+                        </div>
+                        <!-- END list group-->
+                     </li>
+                  </ul>
+                  <!-- END Dropdown menu-->
+               </li>
+               <!-- END Alert menu-->
+
+          <li class="open">
+              <a href="#" data-toggle="dropdown" data-no-persist="true" aria-expanded="true">
+                  <em class="icon-options-vertical"></em>
+              </a>
+              <ul class="dropdown-menu">
+                  <li>
+                      <a href="#">
+                          <em class="fa fa-edit"></em>
+                          My Profile
+                      </a>
+                  </li>
+                        <li>
+                            <a href="#">
+                                <em class="icon-layers"></em>
+                                My Portfolio
+                            </a>
+                        </li>
+
+                 
+                        <li class="nav-divider">
+
+                        </li>
+                        <li>
+                           <a href="#">
+                              <em class="icon-note"></em>
+                              WebDev Credits
+                           </a>
+                        </li>
+
+                  <li class="nav-divider">
+
+                  </li>
+                  <li>
+                      <a href="#">
+                          <em class="icon-logout"></em>
+                          Logout
+                      </a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+      <!-- END Right Navbar-->
+   </div>
+   <!-- END Nav wrapper-->
+</nav>
+<!-- END Top Navbar-->
+        </header>
+        
+        <!-- offsidebar-->
+        <aside class="offsidebar">
+            
+
+<!-- START Off Sidebar (right)-->
+<nav>
+    <div role="tabpanel">
+
+        <div class="panel panel-default mr-sm">
+            <div class="panel-heading">
+                <a href="#" class="pull-right">
+                    
+                </a><strong>Peers</strong>
+            </div>
+            <div id="online-users" class="list-group">
+                
+            <a id="demo_creded_ai" href="#" class="media p mt0 list-group-item user-contact-item"><span class="pull-right"><span class="circle circle-success circle-lg"></span></span><span class="pull-left"><img src="./WebDev - Profile_files/default_profile_male.png" alt="Image" class="media-object img-circle thumb32"></span><span class="media-body"><span class="media-heading"><strong>Joe's Account</strong><br><small class="text-muted">Student</small></span></span></a></div>
+        </div>
+
+    </div>
+</nav>
+<!-- END Off Sidebar (right)-->
+
+        </aside>
+        <!-- Main section-->
+        <section>
+            <!-- Page content-->
+            <div class="content-wrapper">
+                <div id="bootstrap_alerts">
+                </div>
+                
+
+
+<link rel="stylesheet" type="text/css" href="./WebDev - Profile_files/loaders.css">
+<link rel="stylesheet" type="text/css" href="./WebDev - Profile_files/ekko-lightbox.css">
+<link rel="stylesheet" type="text/css" href="./WebDev - Profile_files/sweetalert.css">
+<link rel="stylesheet" type="text/css" href="./WebDev - Profile_files/magicsuggest.css">
+
+<div class="unwrap">
+
+    <div class="row">
+      <div class="p-lg">
+  
+       <!-- Left Section -->
+       <div class="col-lg-2">
+           <div id="left-profile-section">
+
+               <div style="background-image: url('./WebDev - Profile_files/banner_5dff4743-f5a2-4ff3-b32b-6aaf94551292.png')" class="bg-cover">
+                   <div class="p-xl text-center text-white">
+
+
+
+<a href="#" title="User Profile">
+   <div class="profile-img-container">
+      <img src="./WebDev - Profile_files/default_profile_male.png" alt="Profile Image" class="img-thumbnail img-circle thumb128">
+      <div><span class="fa fa-pencil-square-o"></span></div>
+   </div>
+</a>
+
+                       <h3 class="m0">Joe's Account</h3>
+                       <p>Student</p>
+                       <p>Me!</p>
+                   </div>
+               </div>
+
+               <div class="panel panel-default">
+                   <div class="panel-body">
+                       <ul class="list-unstyled ph-sm">
+                               <li>
+                                   <em class="fa fa-home fa-fw mr-lg"></em>
+                                   St. Louis, MO
+                               </li>
+                                                         <li style="font-size: 14px;">
+                                 <em class="fa fa-briefcase fa-fw mr-lg"></em>
+                                 BUSINESS DEMO
+                              </li>
+                           <li>
+                               <em class="fa fa-graduation-cap fa-fw mr-lg"></em>
+                               Student
+                           </li>
+                           <li>
+
+                           </li>
+                       </ul>
+                   </div>
+               </div>
+
+               <div id="interests" data-title="Interests" data-content="Joe&#39;s this area helps me get to know you better. That way I can always be on the lookout for the courses that are best for you." data-placement="right" class="panel panel-default tour-step">
+                   <div class="panel-body">
+                       <h4 class="mt0">Interests</h4>
+                       <hr>
+                       <ul class="list-unstyled ph-xl">
+                           <li>
+                                               <span class="label label-clear">Business</span>
+                                               <span class="label label-clear">Computer Science</span>
+                                               <span class="label label-clear">Data Science</span>
+                                               <span class="label label-clear">Earth Sciences</span>
+                                               <span class="label label-clear">Health &amp; Nutrition</span>
+                                               <span class="label label-clear">Music, Photo &amp; Video</span>
+
+                           </li>
+                       </ul>
+                   </div>
+               </div>
+
+               <div class="panel panel-default">
+                   <div id="skills" data-title="Skills" data-content="Here is a list of your current skills and knowledge. It’s my goal to help you always be growing and advancing these! If there are new things you want to learn, just let me know by adding it to this list." data-placement="right" class="panel-body tour-step">
+                       <h4 class="mt0">Skills</h4>
+                       <hr>
+                           <ul class="list-unstyled ph-xl">
+                               <li>
+                                       <span class="label label-clear">C#</span>
+                               </li>
+                           </ul>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <!-- Center Section -->
+       <div id="main-content" data-title="Dashboard" data-content="Here&#39;s your Dashboard Joe&#39;s, let&#39;s run through it together!" data-placement="bottom" class="col-lg-8 tour-step">
+        
+
+
+           <div role="tabpanel">
+
+            <!-- Nav tabs -->
+           <ul class="nav nav-tabs" role="tablist">
+              <li id="catalog-tab" role="presentation">
+                <a id="catalog-link" href="http://localhost:62825/Courses/" aria-controls="catalog" role="tab">Catalog</a>
+              </li>
+              <li id="enrolled-tab" role="presentation" data-title="Enrolled" data-content="Under the &#39;Enrolled&#39; tab is where the courses you are currently taking are listed. Whenever you want to resume a course, simply come here and click on the course." data-placement="right" class="active tour-step">
+                 <a id="enrolled-link" href="http://localhost:62825/Profile#home" aria-controls="home" role="tab" data-toggle="tab">Enrolled</a>
+              </li>
+              <li id="recommended-tab" role="presentation">
+                 <a id="recommended-link" href="http://localhost:62825/Profile#recommended" aria-controls="recommended" role="tab" data-toggle="tab">Recommended</a>
+              </li>
+              <li id="portfolio-tab" role="presentation" data-title="Portfolio" data-content="This is where I’ll store all your course certificates. I want to make sure we never lose or forget any of your achievements. When you complete a course just make sure you upload your certificates here." data-placement="right" class="tour-step">
+                 <a id="portfolio-link" href="http://localhost:62825/Profile#portfolio" aria-controls="portfolio" role="tab" data-toggle="tab">Portfolio</a>
+              </li>
+              
+           </ul>
+
+               <!-- Tab panes -->
+               <div class="tab-content">
+
+                  <div id="home" role="tabpanel" class="tab-pane fade in active">
+                     
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div class="pull-left">
+                <h4>My enrolled courses</h4>
+            </div>
+            <div class="pull-right">
+                <div id="dropdown-options" class="dropdown-container">
+                    <button data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">
+                        Options <em class="text-bold icon icon-arrow-down"></em>
+                    </button>
+                    <ul role="menu" class="dropdown-menu">
+                        <li role="button">
+                           <a id="sync-courses" href="#" class="btn">
+                                <em class="fa fa-refresh"></em>
+                                <span class="ml-sm">Sync Courses</span>
+                           </a>
+                        </li>
+                        <li class="nav-divider"></li>
+                        <li role="presentation" class="dropdown-header">Sort By:</li>
+                        <li class="nav-divider">
+
+                        </li>
+                       <li role="checkbox">
+                          <div class="checkbox c-checkbox">
+                             <label>
+                                <input name="by-alphabet" id="by-alphabet" type="checkbox" value="False" class="sEnrolledFilter" onclick="GetEnrolledCourses(this);">
+                                <span for="by-alphabet" class="fa fa-check"></span>A-Z
+                             </label>
+                          </div>
+                       </li>
+                       <li role="checkbox">
+                          <div class="checkbox c-checkbox">
+                             <label>
+                                <input name="by-progress" id="by-progress" type="checkbox" value="False" class="sEnrolledFilter" onclick="GetEnrolledCourses(this);">
+                                <span for="by-progress" class="fa fa-check"></span>Progress
+                             </label>
+                          </div>
+                       </li>
+                        <li role="checkbox">
+                            <div class="checkbox c-checkbox">
+                                <label>
+                                    <input name="by-date" id="by-date" type="checkbox" value="False" class="sEnrolledFilter" onclick="GetEnrolledCourses(this);">
+                                    <span for="by-date" class="fa fa-check"></span>Start/End Date
+                                </label>
+                            </div>
+                        </li>
+                        <li class="nav-divider">
+
+                        </li>
+                        <li role="presentation" class="dropdown-header">Group By:</li>
+                        <li class="nav-divider">
+
+                        </li>
+                        <li role="checkbox">
+                            <div class="checkbox c-checkbox">
+                                <label>
+                                    <input name="group-category" id="group-category" type="checkbox" value="False" class="sEnrolledFilter" onclick="GetEnrolledCourses(this);">
+                                    <span for="group-category" class="fa fa-check"></span>Category
+                                </label>
+                            </div>
+                        </li>
+                        <li role="checkbox">
+                            <div class="checkbox c-checkbox">
+                                <label>
+                                    <input name="group-completion" id="group-completion" type="checkbox" value="False" class="sEnrolledFilter" onclick="GetEnrolledCourses(this);">
+                                    <span for="group-completion" class="fa fa-check"></span>Completion
+                                </label>
+                            </div>
+                        </li>
+                        <li role="checkbox">
+                            <div class="checkbox c-checkbox">
+                                <label>
+                                    <input name="group-provider" id="group-provider" type="checkbox" value="False" class="sEnrolledFilter" onclick="GetEnrolledCourses(this);">
+                                    <span for="group-provider" class="fa fa-check"></span>Provider
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+       <hr>
+
+       <div id="no-enrolled-courses" style="display: none;">
+          <br>
+          <br>
+       </div>
+    </div>
+</div>
+
+<div id="sync-in-progress" class="row text-center" style="display: none;">
+   <div class="col-md-8 col-md-offset-2">
+      <div class="alert alert-info">
+         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+         <strong>Synchronization is in progress... it could take up to three minutes.</strong>
+      </div>   
+      <i class="fa fa-refresh fa-spin fa-4x fa-fw"></i>
+      <br>
+      <br>
+   </div>
+</div>
+
+<div id="sync-alert" class="row" style="display: none;">
+   <div class="col-md-8 col-md-offset-2">
+         <div class="alert alert-danger">
+            <strong>Synchronization could not be completed.<a href="#" class="link-unstyled">Click here</a> to update your external account information.</strong>
+         </div>   
+   </div>
+</div>
+
+<div id="enrolled-courses-loading" class="row" style="display: none;">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="loader-demo">
+                    <div class="ball-spin-fade-loader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="enrolled-courses-list" style="">
+    
+    <div class="row">
+        <div id="enrollContent" class="col-md-12"><div id="panelCoursera" role="tablist" aria-multiselectable="true" class="panel-group"><div class="panel panel-default"><a data-toggle="collapse" data-parent="#panelCoursera" class="link-unstyled" href="http://localhost:62825/Profile#Coursera-Group" aria-expanded="true" aria-controls="Coursera-Group" onclick="SetMyCoursesView(this);"><div id="headingCoursera" role="tab" class="panel-heading"><h4 class="panel-title">Coursera</h4></div></a><div id="Coursera-Group" role="tabpanel" aria-labeledby="headingCoursera" class="panel-collapse collapse in" aria-expanded="true" style=""><div class="panel-body"><div class="row"><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="1386" data-course-tablename="coursera" data-course-url="/Course/coursera/statistical-thermodynamics-cm" data-course-title="Statistical Thermodynamics: Molecules to Machines" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/coursera/statistical-thermodynamics-cm" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="https://www.coursera.org/learn/statistical-thermodynamics-cm" target="_blank" title="Statistical Thermodynamics: Molecules to Machines" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>Statistical Thermodynamics: Molecules to Machines</strong></span><br><span class="text-sm text-muted mb-lg">Ends: 8/27/2017</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div><div class="text-center"><span class="text-muted"></span></div><div class="pull-left"></div></div></div></div><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="319" data-course-tablename="coursera" data-course-url="/Course/coursera/jazz-improvisation" data-course-title="Jazz Improvisation" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/coursera/jazz-improvisation" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="http://click.linksynergy.com/link?id=UgW7nNUBao4&amp;offerid=467035.1560514284&amp;type=15&amp;murl=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fjazz-improvisation" target="_blank" title="Jazz Improvisation" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>Jazz Improvisation</strong></span><br><span class="text-sm text-muted mb-lg">Ends: 7/9/2017</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div><div class="text-center"><span class="text-muted"></span></div><div class="pull-left"></div></div></div></div><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="1055" data-course-tablename="coursera" data-course-url="/Course/coursera/philanthropist" data-course-title="Giving 2.0: The MOOC" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/coursera/philanthropist" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="https://www.coursera.org/learn/philanthropist" target="_blank" title="Giving 2.0: The MOOC" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>Giving 2.0: The MOOC</strong></span><br><span class="text-sm text-muted mb-lg">Ends: 6/4/2017</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div><div class="text-center"><span class="text-muted"></span></div><div class="pull-left"></div></div></div></div></div></div></div></div></div><div id="panelEdx" role="tablist" aria-multiselectable="true" class="panel-group"><div class="panel panel-default"><a data-toggle="collapse" data-parent="#panelEdx" class="link-unstyled" href="http://localhost:62825/Profile#Edx-Group" aria-expanded="true" aria-controls="Edx-Group" onclick="SetMyCoursesView(this);"><div id="headingEdx" role="tab" class="panel-heading"><h4 class="panel-title">Edx</h4></div></a><div id="Edx-Group" role="tabpanel" aria-labeledby="headingEdx" class="panel-collapse collapse"><div class="panel-body"><div class="row"><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="339" data-course-tablename="edx" data-course-url="/Course/edx/null" data-course-title="Data Science Essentials" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/edx/null" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="https://www.edx.org/course/data-science-essentials-microsoft-dat203-1x-3?utm_medium=affiliate_partner&amp;utm_source=CredEdLLC" target="_blank" title="Data Science Essentials" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>Data Science Essentials</strong></span><br><span class="text-sm text-muted mb-lg">Ends: 6/29/2017</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div><div class="text-center"><span class="text-muted"></span></div><div class="pull-left"></div></div></div></div><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="54" data-course-tablename="edx" data-course-url="/Course/edx/null" data-course-title="Evidence-Based Business Communication" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/edx/null" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="https://www.edx.org/course/evidence-based-business-communication-anux-ebm02x?utm_medium=affiliate_partner&amp;utm_source=CredEdLLC" target="_blank" title="Evidence-Based Business Communication" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>Evidence-Based Business Communication</strong></span><br><span class="text-sm text-muted mb-lg">Starts: 5/3/2017</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div><div class="text-center"><span class="text-muted"></span></div><div class="pull-left"></div></div></div></div><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="342" data-course-tablename="edx" data-course-url="/Course/edx/null" data-course-title="Analyzing Big Data with Microsoft R Server" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/edx/null" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="https://www.edx.org/course/microsoftdat213x?utm_medium=affiliate_partner&amp;utm_source=CredEdLLC" target="_blank" title="Analyzing Big Data with Microsoft R Server" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>Analyzing Big Data with Microsoft R Server</strong></span><br><span class="text-sm text-muted mb-lg">Ends: 6/29/2017</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div><div class="text-center"><span class="text-muted"></span></div><div class="pull-left"></div></div></div></div><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="518" data-course-tablename="edx" data-course-url="/Course/edx/null" data-course-title="Introducción a la estructura de la materia" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/edx/null" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="https://www.edx.org/course/introduccion-la-estructura-de-la-materia-upvalenciax-iq101-1x-2?utm_medium=affiliate_partner&amp;utm_source=CredEdLLC" target="_blank" title="Introducción a la estructura de la materia" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>Introducción a la estructura de la materia</strong></span><br><span class="text-sm text-muted mb-lg">Starts: 3/21/2017</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div><div class="text-center"><span class="text-muted"></span></div><div class="pull-left"></div></div></div></div></div><div class="row"><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="520" data-course-tablename="edx" data-course-url="/Course/edx/null" data-course-title="El enlace químico y las interacciones moleculares" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/edx/null" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="https://www.edx.org/course/el-enlace-quimico-y-las-interacciones-upvalenciax-iq101-2x-1?utm_medium=affiliate_partner&amp;utm_source=CredEdLLC" target="_blank" title="El enlace químico y las interacciones moleculares" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>El enlace químico y las interacciones moleculares</strong></span><br><span class="text-sm text-muted mb-lg">Starts: 4/25/2017</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div><div class="text-center"><span class="text-muted"></span></div><div class="pull-left"></div></div></div></div><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="165" data-course-tablename="edx" data-course-url="/Course/edx/null" data-course-title="Smart Cities" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/edx/null" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="https://www.edx.org/course/smart-cities-ethx-ethx-fc-03x-0?utm_medium=affiliate_partner&amp;utm_source=CredEdLLC" target="_blank" title="Smart Cities" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>Smart Cities</strong></span><br><span class="text-sm text-muted mb-lg">Ends: 5/7/2017</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="100" style="width: 3%"></div></div><div class="text-center"><span class="text-muted">3%</span></div><div class="pull-left"><div class="label label-info">In Progress</div></div></div></div></div><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="167" data-course-tablename="edx" data-course-url="/Course/edx/null" data-course-title="Livable Future Cities" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/edx/null" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="https://www.edx.org/course/quality-life-livability-future-cities-ethx-fc-02x-1?utm_medium=affiliate_partner&amp;utm_source=CredEdLLC" target="_blank" title="Livable Future Cities" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>Livable Future Cities</strong></span><br><span class="text-sm text-muted mb-lg">Starts: 6/26/2016</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div><div class="text-center"><span class="text-muted"></span></div><div class="pull-left"></div></div></div></div><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="673" data-course-tablename="edx" data-course-url="/Course/edx/null" data-course-title="Robotics" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/edx/null" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="https://www.edx.org/course/columbiaxcsmm103x?utm_medium=affiliate_partner&amp;utm_source=CredEdLLC" target="_blank" title="Robotics" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>Robotics</strong></span><br><span class="text-sm text-muted mb-lg">Ends: 7/9/2017</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div><div class="text-center"><span class="text-muted"></span></div><div class="pull-left"></div></div></div></div></div><div class="row"><div class="col-md-3"><div class="panel panel-courses mt-lg"><div class="panel-heading bg-white"><div class="pull-right"><div class="btn-group dropdown"><button data-toggle="dropdown" class="btn btn-link"><em class="fa fa-ellipsis-v fa-lg text-muted"></em></button><ul role="menu" class="dropdown-menu dropdown-menu-right"><li><a href="http://localhost:62825/Profile#" data-toggle="modal" data-target="#share-course" data-course-id="722" data-course-tablename="edx" data-course-url="/Course/edx/null" data-course-title="Developing Intelligent Apps" data-course-img="./WebDev - Profile_files/img_4-300x200.jpg"><span>Share</span></a></li><li class="nav-divider"></li><li><a href="http://localhost:62825/Course/edx/null" target="_blank"><span>Course Info</span></a></li></ul></div></div></div><div class="panel-body panel-enrolled-courses text-center"><a href="https://www.edx.org/course/?utm_medium=affiliate_partner&amp;utm_source=CredEdLLC" target="_blank" title="Developing Intelligent Apps" class="link-unstyled text-primary"><div class="course-image-container" style="background-image: url(&#39;./WebDev - Profile_files/img_4-300x200.jpg?h=190&#39;)"></div><br><span class="h5"><strong>Developing Intelligent Apps</strong></span><br><span class="text-sm text-muted mb-lg">Ends: 6/29/2017</span></a></div><div class="panel-footer panel-footer-clear clearfix"><div class="progress progress-courses"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div><div class="text-center"><span class="text-muted"></span></div><div class="pull-left"></div></div></div></div></div></div></div></div></div></div>
+    </div>
+
+</div>
+
+
+                  </div>
+                  
+                  <div id="recommended" role="tabpanel" class="tab-pane fade in">
+                     
+
+<div class="row">
+   <div class="col-md-12">
+      <h4>Recommended Courses</h4>
+      <hr>
+
+   </div>
+</div>
+
+<div id="recommended-courses">
+
+
+<div class="row">
+    <div class="col-md-12">
+
+                <!--- Show more will allow to see them all -->
+                        <div class="row">
+                 <div id="course_0" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Pianoforall - Incredible New Way To Learn Piano &amp; Keyboard" class="link-unstyled text-primary">
+                             <div id="recommended_image_0" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Pianoforall - Incredible New Way To Learn Piano &amp; Keyboard</strong></span>
+                                <br>
+                                <span class="h6">Music</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_1" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Reiki Level I, II and Master/Teacher Program" class="link-unstyled text-primary">
+                             <div id="recommended_image_1" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Reiki Level I, II and Master/Teacher Program</strong></span>
+                                <br>
+                                <span class="h6">Personal Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_2" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Learn Ethical Hacking From Scratch" class="link-unstyled text-primary">
+                             <div id="recommended_image_2" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Learn Ethical Hacking From Scratch</strong></span>
+                                <br>
+                                <span class="h6">IT &amp; Software</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_3" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Learn to Code by Making Games - Complete C# Unity Developer" class="link-unstyled text-primary">
+                             <div id="recommended_image_3" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Learn to Code by Making Games - Complete C# Unity Developer</strong></span>
+                                <br>
+                                <span class="h6">Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                        </div><div class="row">
+                 <div id="course_4" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Finding Your Life&#39;s Purpose by Eckhart Tolle" class="link-unstyled text-primary">
+                             <div id="recommended_image_4" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Finding Your Life's Purpose by Eckhart Tolle</strong></span>
+                                <br>
+                                <span class="h6">Personal Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_5" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Sounds True&#39;s Freedom to Choose Something Different, Part 1" class="link-unstyled text-primary">
+                             <div id="recommended_image_5" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Sounds True's Freedom to Choose Something Different, Part 1</strong></span>
+                                <br>
+                                <span class="h6">Personal Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_6" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="The Complete Digital Marketing Course 2017 - 12 Courses in 1" class="link-unstyled text-primary">
+                             <div id="recommended_image_6" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>The Complete Digital Marketing Course 2017 - 12 Courses in 1</strong></span>
+                                <br>
+                                <span class="h6">Marketing</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_7" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Machine Learning A-Z™: Hands-On Python &amp; R In Data Science" class="link-unstyled text-primary">
+                             <div id="recommended_image_7" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Machine Learning A-Z™: Hands-On Python &amp; R In Data Science</strong></span>
+                                <br>
+                                <span class="h6">Business</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                        </div><div class="row">
+                 <div id="course_8" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Become a Game Maker with GameMaker Studio" class="link-unstyled text-primary">
+                             <div id="recommended_image_8" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Become a Game Maker with GameMaker Studio</strong></span>
+                                <br>
+                                <span class="h6">Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_9" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="How to Run a Successful Blog Tour for Novelists" class="link-unstyled text-primary">
+                             <div id="recommended_image_9" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>How to Run a Successful Blog Tour for Novelists</strong></span>
+                                <br>
+                                <span class="h6">Marketing</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_10" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Game Programming with Unity" class="link-unstyled text-primary">
+                             <div id="recommended_image_10" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Game Programming with Unity</strong></span>
+                                <br>
+                                <span class="h6">Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_11" class="col-md-3" style="display: ">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Sounds True Presents: The Yoga of Awakening" class="link-unstyled text-primary">
+                             <div id="recommended_image_11" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Sounds True Presents: The Yoga of Awakening</strong></span>
+                                <br>
+                                <span class="h6">Health &amp; Fitness</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                        </div><div class="row">
+                 <div id="course_12" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="The Complete Java Developer Course. Learn Step by Step" class="link-unstyled text-primary">
+                             <div id="recommended_image_12" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>The Complete Java Developer Course. Learn Step by Step</strong></span>
+                                <br>
+                                <span class="h6">Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_13" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Sounds True&#39;s Mindfulness Practice for Joy and Compassion" class="link-unstyled text-primary">
+                             <div id="recommended_image_13" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Sounds True's Mindfulness Practice for Joy and Compassion</strong></span>
+                                <br>
+                                <span class="h6">Personal Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_14" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="The Ultimate Sales Prospecting Course" class="link-unstyled text-primary">
+                             <div id="recommended_image_14" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>The Ultimate Sales Prospecting Course</strong></span>
+                                <br>
+                                <span class="h6">Business</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_15" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="The Unreal Engine Developer Course - Learn C++ &amp; Make Games" class="link-unstyled text-primary">
+                             <div id="recommended_image_15" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>The Unreal Engine Developer Course - Learn C++ &amp; Make Games</strong></span>
+                                <br>
+                                <span class="h6">Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                        </div><div class="row">
+                 <div id="course_16" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Photography Masterclass: Your Complete Guide to Photography" class="link-unstyled text-primary">
+                             <div id="recommended_image_16" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Photography Masterclass: Your Complete Guide to Photography</strong></span>
+                                <br>
+                                <span class="h6">Photography</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_17" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Sounds True Presents: Qi Gong for Health and Healing" class="link-unstyled text-primary">
+                             <div id="recommended_image_17" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Sounds True Presents: Qi Gong for Health and Healing</strong></span>
+                                <br>
+                                <span class="h6">Health &amp; Fitness</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_18" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Acumen Presents: Chris Anderson on Public Speaking" class="link-unstyled text-primary">
+                             <div id="recommended_image_18" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Acumen Presents: Chris Anderson on Public Speaking</strong></span>
+                                <br>
+                                <span class="h6">Business</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_19" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="The Python Mega Course: Build 10 Real World Applications" class="link-unstyled text-primary">
+                             <div id="recommended_image_19" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>The Python Mega Course: Build 10 Real World Applications</strong></span>
+                                <br>
+                                <span class="h6">Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                        </div><div class="row">
+                 <div id="course_20" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Arduino Step by Step: Your complete guide" class="link-unstyled text-primary">
+                             <div id="recommended_image_20" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Arduino Step by Step: Your complete guide</strong></span>
+                                <br>
+                                <span class="h6">IT &amp; Software</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_21" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Manifesting Your Best Life with Deepak Chopra - Part 1" class="link-unstyled text-primary">
+                             <div id="recommended_image_21" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Manifesting Your Best Life with Deepak Chopra - Part 1</strong></span>
+                                <br>
+                                <span class="h6">Personal Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_22" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Sounds True Presents: Body and Mind are One, Part 1" class="link-unstyled text-primary">
+                             <div id="recommended_image_22" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Sounds True Presents: Body and Mind are One, Part 1</strong></span>
+                                <br>
+                                <span class="h6">Personal Development</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div id="course_23" class="col-md-3" style="display: none">
+                    <div class="row">
+                       <div class="col-md-4">
+
+                       </div>
+                    </div>
+                    <div class="panel panel-courses">
+                       <div class="panel-body text-center">
+                          <a href="http://localhost:62825/Course/udemy" target="_blank" title="Ultimate Google AdWords Course 2017–Stop SEO &amp; Win With PPC!" class="link-unstyled text-primary">
+                             <div id="recommended_image_23" class="course-image-container" style="background-image: url(&#39;/images/img_4-300x200.jpg?h=190&#39;)">
+                             </div>
+                                <div class="course-certificate">Certificate</div>
+                             <br>
+                             <div class="course-description">
+                                <span class="h5"><strong>Ultimate Google AdWords Course 2017–Stop SEO &amp; Win With PPC!</strong></span>
+                                <br>
+                                <span class="h6">Marketing</span>
+                                
+                                <br><br>
+                             </div>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                    </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <div id="showMore" class="show-more">
+                        <hr>
+                        <a class="btn btn-default" href="javascript:void(0)" onclick="ShowMore(&#39;course_&#39;)">Show More</a>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+
+                  </div>
+
+                  <div id="portfolio" role="tabpanel" class="tab-pane fade">
+                       
+
+<div class="row">
+    <div class="col-md-12">
+
+        <h4>Online Certificates</h4>
+        <hr>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+                 <div class="row">
+                    <div class="col-md-3">
+                        <div class="panel">
+                            <div class="panel-body panel-certificates text-center">
+                                    <a href="./WebDev - Profile_files/1e13e9d9-c271-4ed9-8c0e-d9886f8a1fdc_9.jpg" title="Certificate Image" data-toggle="lightbox" data-gallery="certificates-gallery" data-title="Canvas: C3" data-footer="Completed Date: 02/2012">
+                                        <img id="certificate_image_9" class="center-block img-thumbnail thumb250-odd certificate-thumb" alt="Certificate" src="./WebDev - Profile_files/1e13e9d9-c271-4ed9-8c0e-d9886f8a1fdc_9.jpg">
+                                    </a>
+
+                            </div>
+                            <div id="certificate_footer_9" class="panel-footer clearfix bg-white">
+                                <div class="clearfix">
+                                    <div class="pull-left">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="panel">
+                            <div class="panel-body panel-certificates text-center">
+                                    <a href="./WebDev - Profile_files/1e13e9d9-c271-4ed9-8c0e-d9886f8a1fdc_10.jpg" title="Certificate Image" data-toggle="lightbox" data-gallery="certificates-gallery" data-title="Udemy: C4" data-footer="Completed Date: 04/2013">
+                                        <img id="certificate_image_10" class="center-block img-thumbnail thumb250-odd certificate-thumb" alt="Certificate" src="./WebDev - Profile_files/1e13e9d9-c271-4ed9-8c0e-d9886f8a1fdc_10.jpg">
+                                    </a>
+
+                            </div>
+                            <div id="certificate_footer_10" class="panel-footer clearfix bg-white">
+                                <div class="clearfix">
+                                    <div class="pull-left">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="panel">
+                            <div class="panel-body panel-certificates text-center">
+                                    <a href="./WebDev - Profile_files/1e13e9d9-c271-4ed9-8c0e-d9886f8a1fdc_13.jpg" title="Certificate Image" data-toggle="lightbox" data-gallery="certificates-gallery" data-title="Future Learn: C2" data-footer="Completed Date: 06/2011">
+                                        <img id="certificate_image_13" class="center-block img-thumbnail thumb250-odd certificate-thumb" alt="Certificate" src="./WebDev - Profile_files/1e13e9d9-c271-4ed9-8c0e-d9886f8a1fdc_13.jpg">
+                                    </a>
+
+                            </div>
+                            <div id="certificate_footer_13" class="panel-footer clearfix bg-white">
+                                <div class="clearfix">
+                                    <div class="pull-left">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="panel">
+                            <div class="panel-body panel-certificates text-center">
+                                    <a href="./WebDev - Profile_files/1e13e9d9-c271-4ed9-8c0e-d9886f8a1fdc_19.jpg" title="Certificate Image" data-toggle="lightbox" data-gallery="certificates-gallery" data-title="Edx: wdwdw" data-footer="Completed Date: 05/2012">
+                                        <img id="certificate_image_19" class="center-block img-thumbnail thumb250-odd certificate-thumb" alt="Certificate" src="./WebDev - Profile_files/1e13e9d9-c271-4ed9-8c0e-d9886f8a1fdc_19.jpg">
+                                    </a>
+
+                            </div>
+                            <div id="certificate_footer_19" class="panel-footer clearfix bg-white">
+                                <div class="clearfix">
+                                    <div class="pull-left">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="panel">
+                            <div class="panel-body panel-certificates text-center">
+                                    <a href="./WebDev - Profile_files/1e13e9d9-c271-4ed9-8c0e-d9886f8a1fdc_25.jpg" title="Certificate Image" data-toggle="lightbox" data-gallery="certificates-gallery" data-title="novoed: Test 2" data-footer="Completed Date: 03/2016">
+                                        <img id="certificate_image_25" class="center-block img-thumbnail thumb250-odd certificate-thumb" alt="Certificate" src="./WebDev - Profile_files/1e13e9d9-c271-4ed9-8c0e-d9886f8a1fdc_25.jpg">
+                                    </a>
+
+                            </div>
+                            <div id="certificate_footer_25" class="panel-footer clearfix bg-white">
+                                <div class="clearfix">
+                                    <div class="pull-left">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+
+        </div>
+
+       </div>
+       </div>
+    </div>
+    <button id="update-notification" type="button" data-notify="" data-message="&lt;em class=&#39;fa fa-check&#39;&gt;&lt;/em&gt; Profile Updated!" data-options="{&quot;status&quot;:&quot;success&quot;}" class="btn btn-success" style="display:none;"></button>
+</div>
+
+
+
+            </div>
+        </section>
+        <!-- Page footer-->
+        
+   </div>
+
+
+
+
+<!-- Modal-->
+<div id="share-course" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="myModalLabel" class="modal-title">Sharing Knowledge</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <div class="row">
+                       <div class="col-md-3">
+                          <div id="course-img" class="course-share-image-container">
+                          </div>
+                       </div>
+                        <div class="col-md-9">
+                            <strong><span id="course-title"></span></strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span>Contact(s):</span>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="ms-ctn form-control ms-as-string " style="" id="ms-contacts"><span class="ms-helper " style="display: none;"></span><div class="ms-sel-ctn"><input type="text" class="" placeholder="User Name or Email" style="width: 58px;"><div style="display: none;"></div></div><div class="ms-trigger"><div class="ms-trigger-ico"></div></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span>Message:</span>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea id="shareMessage" rows="3" class="form-control no-resize textarea-comment" name="comment" maxlength="100" placeholder="Found this course and will like to share it with you!"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="clearfix">
+                    <div class="pull-right">
+                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                        <button id="shareMessageButton" type="button" class="btn btn-primary" disabled="disabled">Send</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+    
+
+<!-- Modal -->
+<div id="myBot" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <div class="pull-left">
+                    <img class="img-circle thumb32" alt="Sender Image" src="./WebDev - Profile_files/ai_1_thumb_bot.png">
+                    <span class="text-bold pl-sm">Rudi</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div style="width: 490px; height: 510px;">                      
+                    
+                    
+                    
+                    
+                        
+                        <title>Bot Chat</title>
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+                        <link href="./WebDev - Profile_files/botchat.css" rel="stylesheet">
+                    
+                    
+                    <div id="BotChatGoesHere"><div data-reactroot="" class="wc-app"><div class="wc-app-left-container"><div class="wc-chatview-panel"><div class="wc-header"><span>Chat</span></div><div class="wc-message-groups"><div class="wc-message-group"><div class="wc-message-group-content"></div></div></div><div class="wc-console"><div class="wc-textbox"><input type="text" value="" placeholder="Type your message..."></div><button class="btn btn-primary wc-send">Send</button></div></div></div></div></div>
+                    <script src="./WebDev - Profile_files/botchat.js.download"></script>
+                    <script>
+                        var params = {
+                            t: '9rWJSrFgBLk.cwA.c-o.CzWwex-HzBpDCg5XVQMWhOumFBPaTlREIM5JBJzqVkA',
+                            botid:    '1',
+                            botname:  'Rudi',
+                            userid:   '1e13e9d9-c271-4ed9-8c0e-d9886f8a1fdc',
+                            username: 'Joes'
+                        };
+                        location
+                            .search
+                            .substring(1)
+                            .split("&")
+                            .forEach(function (pair) {
+                                var p = pair.split("=");
+                                params[p[0]] = decodeURIComponent(p[1]);
+                            });
+                        
+                        var botConnection = new BotChat.DirectLine({
+                            secret: params['s'],
+                            token: params['t'],
+                            domain: params['domain'],
+                            webSocket: params['webSocket']
+                        });
+
+                        var user = {
+                            id: params['userid'] || 'userid',
+                            name: params["username"] || 'username'
+                        };
+
+                        var bot = {
+                            id: params['botid'] || 'botid',
+                            name: params["botname"] || 'botname'
+                        };
+
+                        BotChat.App({
+                            botConnection: botConnection,
+                            user: user,
+                            bot: bot},
+                            document.getElementById("BotChatGoesHere"));
+                    </script>
+                    
+                    
+
+                </div>
+
+        </div>
+        <div class="modal-footer botchat-footer">
+            
+        </div>
+    </div>
+
+</div>
+</div>
+    <!-- =============== VENDOR SCRIPTS ===============-->
+    <script src="./WebDev - Profile_files/jquery.validate.js.download"></script>
+    <script src="./WebDev - Profile_files/jquery.validate.unobtrusive.js.download"></script>
+
+    <script src="./WebDev - Profile_files/jquery.storageapi.min.js.download"></script>
+
+    <script src="./WebDev - Profile_files/jquery.easing.min.js.download"></script>
+
+    <script src="./WebDev - Profile_files/animo.min.js.download"></script>
+
+    <script src="./WebDev - Profile_files/jquery.slimscroll.min.js.download"></script>
+
+    <script src="./WebDev - Profile_files/screenfull.min.js.download"></script>
+
+    <!-- =============== APP SCRIPTS ===============-->
+    <script src="./WebDev - Profile_files/app.init.min.js.download"></script>
+    <script src="./WebDev - Profile_files/bootstrap-start.min.js.download"></script>
+    <script src="./WebDev - Profile_files/classyloader.min.js.download"></script>
+    <script src="./WebDev - Profile_files/clear-storage.min.js.download"></script>
+    <script src="./WebDev - Profile_files/constants.min.js.download"></script>
+    <script src="./WebDev - Profile_files/localize.min.js.download"></script>
+    <script src="./WebDev - Profile_files/navbar-search.min.js.download"></script>
+    <script src="./WebDev - Profile_files/notify.min.js.download"></script>
+    <script src="./WebDev - Profile_files/panel-tools.min.js.download"></script>
+    <script src="./WebDev - Profile_files/sidebar.min.js.download"></script>
+    <script src="./WebDev - Profile_files/sparkline.min.js.download"></script>
+    <script src="./WebDev - Profile_files/toggle-state.min.js.download"></script>
+    <script src="./WebDev - Profile_files/utils.min.js.download"></script>
+    <script src="./WebDev - Profile_files/chart.min.js.download"></script>
+    <script src="./WebDev - Profile_files/chartist.min.js.download"></script>
+    <script src="./WebDev - Profile_files/chart-knob.min.js.download"></script>
+    <script src="./WebDev - Profile_files/chart-easypie.min.js.download"></script>
+
+
+    <!-- =============== SignalR SCRIPTS ===============-->
+        <!--Reference the SignalR library. -->
+        <script type="text/javascript" src="./WebDev - Profile_files/jquery.signalR-2.2.2.min.js.download"></script>
+        <!--Reference the autogenerated SignalR hub script. -->
+        <script type="text/javascript" src="./WebDev - Profile_files/hubs"></script>
+        <!--Gets populated online users on the offsidebar. -->
+        <script type="text/javascript" src="./WebDev - Profile_files/hit-counter-hub.js.download"></script>
+        <!--Get notification when a course sync is completed -->
+        <script type="text/javascript" src="./WebDev - Profile_files/courses-notification-hub.js.download"></script>
+        <!-- NOTE: To avoid multiple HTTP request and creating proxies, start only one connection -->
+        <script type="text/javascript" src="./WebDev - Profile_files/hub-start.js.download"></script>
+
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    
+
+   <!-- jQuery -->
+   <script src="./WebDev - Profile_files/sweetalert.js.download"></script>
+   <script src="./WebDev - Profile_files/ekko-lightbox.js.download"></script>
+   <script src="./WebDev - Profile_files/magicsuggest.js.download"></script>
+   <script src="./WebDev - Profile_files/moment.min.js.download"></script>
+   <script src="./WebDev - Profile_files/autosize.min.js.download"></script>
+   <script src="./WebDev - Profile_files/profile-0.0.1.js.download"></script>
+   <script src="./WebDev - Profile_files/courses-0.0.1.js.download"></script>
+   <script src="./WebDev - Profile_files/share-course.js.download"></script>
+
+   <script type="text/javascript">
+
+      var profileUpdated = false;
+
+      if ('undefined' !== "undefined") {
+         studentId = 'undefined';
+      }
+
+      $(document).ready(function() {
+
+         if (profileUpdated === true && studentId == undefined) {
+            setTimeout(function() {
+                  $('#update-notification')[0].click();
+               },
+               300);
+         }
+
+         var newUser = false;
+         var botId   = 1;
+
+         if (newUser === true && studentId == undefined) {
+
+            var botImage = "/Content/img/ai_1_bot_small.png";
+
+            swal({
+                  html: true,
+                  title: "Hi Joe&#39;s I'm Rudi and it's nice to meet you!",
+                  text: "I wanted to say hello and show you around.",
+                  showCancelButton: true,
+                  imageUrl: botImage,
+                  confirmButtonColor: "#21a5e4",
+                  confirmButtonText: "Start",
+                  cancelButtonText: "No tour for me",
+                  closeOnConfirm: true,
+                  closeOnCancel: true
+               },
+               function(isConfirm) {
+                  if (isConfirm) {
+                     StartTour();
+                  }
+               });
+
+            UpdateTourBit();
+         }
+
+      });
+
+   </script>
+   
+
+    <!-- =============== GOOGLE ==================== -->
+    <!-- Google Analytics -->
+
+    <!-- Heap Analytics -->
+
+
+</body></html>

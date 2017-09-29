@@ -1,0 +1,139 @@
+
+// Global variables
+var thisCounterHub = $.connection.hitCounterHub;
+//$.connection.hub.logging = true;
+
+$(document).ready(function () {
+
+   var periodicCheck = undefined;
+
+   function GetUserInfo(message)
+   {
+       var userInfo = undefined;
+
+      // Retrieve the account information
+      // TODO: Add token
+       $.ajax({
+           type: "GET",
+           cache: false,
+           async: false,
+           url: "/Profile/GetUserInfo",
+           data: { email: message }
+           //error: function (xhr, ajaxOptions, thrownError) {
+           //   alert('Failed to retrieve account information.');
+           //}
+       }).done(function (data) {
+           userInfo = data.items[0];
+       });
+
+       return userInfo;
+   }
+
+   function AddContact(email, image, name, position) {
+
+       var tagId = email.replace("@", "_").replace(".", "_");
+
+       if (document.getElementById(tagId) == null) {
+
+           var imageLink = "";
+
+           if (image == null || image === "#") {
+               imageLink = '<em class="fa fa-user fa-2x"></em>';
+           }
+           else {
+               imageLink = '<img src="' + image + '" alt="Image" class="media-object img-circle thumb32" />';
+           }
+
+           $('#online-users').append('<a id="' + tagId + '" href="#" class="media p mt0 list-group-item user-contact-item">' +
+                                        '<span class="pull-right">'+
+                                           '<span class="circle circle-success circle-lg"></span>'+
+                                        '</span>'+
+                                        '<span class="pull-left">' + 
+                                          imageLink +
+                                        '</span>' + 
+                                        '<span class="media-body">'+ 
+                                           '<span class="media-heading">'+
+                                              '<strong>' + name + '</strong><br/><small class="text-muted">' + position + '</small>' +
+                                           '</span>'+
+                                        '</span>'+
+                                     '</a>');
+       }
+   }
+
+   function updateLocalServer() {
+       thisCounterHub.server.getOnlineUsers();
+   }
+
+   thisCounterHub.client.addOnlinePerson = function (message) {
+       
+       var contact = document.getElementById(message);
+
+       if (contact == null) {
+
+           $.when(GetUserInfo(message)).done(function(userInfo){
+
+               AddContact(message,  userInfo.ImageLink, userInfo.Name, userInfo.Position);
+
+               // Request list
+               thisCounterHub.server.getOnlineUsers();
+
+           });
+       }
+   };
+
+   thisCounterHub.client.unreadMessageNotification = function (unreadMessages) {
+
+      var messagesNotification = document.getElementById("messages-notification");
+
+      if (messagesNotification != null) {
+         messagesNotification.innerHTML     = unreadMessages + " new messages";
+         messagesNotification.style.display = 'inline';
+
+         var alertNotification = document.getElementById("alert-notification");
+
+         if (alertNotification != null) {
+            alertNotification.innerHTML     = "!";
+            alertNotification.style.display = 'inline';
+         }
+      }
+
+   };
+
+
+   thisCounterHub.client.onlineUsers = function (list) {
+       
+       var emails = new Array(list.length);
+
+       for (var i = 0; i < list.length; i++)
+       {
+           AddContact(list[i].items[0].Email, list[i].items[0].ImageLink, list[i].items[0].Name, list[i].items[0].Position);
+           emails.push(list[i].items[0].Email.replace("@", "_").replace(".", "_"));
+       }
+       // Update current list
+       var inputs = document.getElementsByClassName("user-contact-item");
+       for (var x=0; x<inputs.length; x++)
+       {
+           var email = inputs[x].getAttribute("id");
+           if (emails.indexOf(email) < 0) {
+               var onlineUser = document.getElementById(email);
+               onlineUser.outerHTML = '';
+           }
+       }
+   };
+
+   // Make it callable from the Profile View
+   window.UpdateOnlineUsers = function () {
+       if (!$("#body-layout").hasClass("offsidebar-open")) {
+           // Request list periodically 
+           periodicCheck = setInterval(updateLocalServer, 5000);
+       }
+       else {
+           if (periodicCheck != undefined) {
+               clearInterval(periodicCheck);
+               periodicCheck = undefined;
+           }
+       }
+   }
+
+
+});

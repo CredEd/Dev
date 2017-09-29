@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://localhost:62825/Profile/Messages -->
+<html lang="en" class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="WebDev Courses">
+    <meta name="keywords" content="online classes, mooc, free online courses, online learning, mooc aggregator, verified courses, college classes, university class, university courses, dashboard, admin">
+    <title>Messages | WebDev</title>
+    <!-- =============== VENDOR STYLES ===============-->
+    <link href="./Messages _ WebDev_files/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./Messages _ WebDev_files/simple-line-icons.min.css" rel="stylesheet">
+
+    <link href="./Messages _ WebDev_files/animate.min.css" rel="stylesheet">
+
+    <link href="./Messages _ WebDev_files/whirl.min.css" rel="stylesheet">
+
+    <!-- =============== BOOTSTRAP STYLES ===============-->
+    <link href="./Messages _ WebDev_files/bootstrap.min.css" rel="stylesheet" type="text/css" id="bscss">
+    <!-- =============== APP STYLES ===============-->
+    <link href="./Messages _ WebDev_files/app.css" rel="stylesheet" type="text/css" id="maincss">
+    <link href="./Messages _ WebDev_files/mvc-override.min.css" rel="stylesheet" type="text/css">
+    <!-- =============== PAGE VENDOR STYLES =============== -->
+</head>
+
+<body id="body-layout" data-spy="scroll" data-target=".navbar" class="vsc-initialized">
+    <div class="wrapper no-sidebar">
+        <!-- top navbar-->
+        <header class="topnavbar-wrapper">
+            
+
+<!-- START Top Navbar-->
+<nav class="navbar topnavbar navbar-fixed-top">
+   <!-- START navbar header-->
+   <div class="navbar-header">
+      <a href="http://localhost:62825/Profile" class="navbar-brand">
+         <div class="brand-logo">
+            <img src="./Messages _ WebDev_files/logo.png" alt="WebDev Logo" class="img-responsive">
+         </div>
+         <div class="brand-logo-collapsed">
+             <img src="./Messages _ WebDev_files/logo-layout.png" alt="WebDev Logo" class="img-responsive">
+         </div>
+      </a>
+   </div>
+   <!-- END navbar header-->
+   <!-- START Nav wrapper-->
+   <div class="nav-wrapper">
+      <!-- START Right Navbar-->
+      <ul class="nav navbar-nav navbar-right">
+         <!-- START Header buttons -->
+          <li>
+              <a href="http://localhost:62825/Profile">
+                  <em class="icon-home"></em>
+              </a>
+          </li>
+          <li>
+              <a href="http://localhost:62825/Profile/Messages#" data-toggle-state="offsidebar-open" data-no-persist="true" onclick="javascript:UpdateOnlineUsers();">
+                  <em class="icon-people"></em>
+              </a>
+          </li>           
+
+          <li>
+              <a href="http://localhost:62825/Profile/Messages#" data-toggle="dropdown" data-no-persist="true">
+                  <em class="icon-options-vertical"></em>
+              </a>
+              <ul class="dropdown-menu">
+                  <li>
+                      <a href="http://localhost:62825/Profile/Edit#tabSetting0">
+                          <em class="fa fa-edit"></em>
+                          My Profile
+                      </a>
+                  </li>
+
+                 
+
+                  <li class="nav-divider">
+
+                  </li>
+                  <li>
+                      <a href="http://localhost:62825/Account/LogOff">
+                          <em class="icon-logout"></em>
+                          Logout
+                      </a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+      <!-- END Right Navbar-->
+   </div>
+   <!-- END Nav wrapper-->
+</nav>
+<!-- END Top Navbar-->
+        </header>
+        <!-- offsidebar-->
+        <aside class="offsidebar">
+            
+
+<!-- START Off Sidebar (right)-->
+<nav>
+    <div role="tabpanel">
+
+        <div class="panel panel-default mr-sm">
+            <div class="panel-heading">
+                <a href="http://localhost:62825/Profile/Messages#" class="pull-right">
+                    
+                </a><strong>Peers</strong>
+            </div>
+            <div id="online-users" class="list-group">
+                
+            <a id="demo_creded_ai" href="http://localhost:62825/Profile/Messages#" class="media p mt0 list-group-item user-contact-item"><span class="pull-right"><span class="circle circle-success circle-lg"></span></span><span class="pull-left"><img src="./Messages _ WebDev_files/user.png" alt="Image" class="media-object img-circle thumb32"></span><span class="media-body"><span class="media-heading"><strong>Joe's Account</strong><br><small class="text-muted">Student</small></span></span></a></div>
+        </div>
+
+    </div>
+</nav>
+<!-- END Off Sidebar (right)-->
+
+        </aside>
+        <!-- Main section-->
+        <section>
+            <!-- Page content-->
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div id="bootstrap_alerts">
+                        </div>
+                    </div>
+                </div>
+                
+
+
+<div class="row">
+    <div class="col-md-2">
+        <br>
+    </div>
+    <div class="col-sm-12 col-md-2">
+
+        <div class="all-messages">
+
+            <div class="panel b">
+
+                <div class="panel-heading bg-gray-lighter text-bold">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            All Messages
+                        </div>
+                        <div class="pull-right">
+                            <a href="http://localhost:62825/Profile/Messages#" data-toggle="modal" data-target="#new-message" class="btn btn-xs btn-default"><em class="icon-note"></em></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+
+                    <div id="default-users" class="list-group">
+
+                        <span class="pull-right">
+                            <span class="badge bg-gray">0</span>
+                        </span>
+                        <span class="pull-left">
+                            <em class="fa fa-user fa-2x"></em>
+                        </span>
+                        <span class="media-body">
+                            <span class="media-heading ml-sm">
+                                None
+                            </span>
+                        </span>
+
+                    </div>
+
+                    <div id="sender-users" class="list-group" style="display: none;">
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-5">
+
+        <ul class="posts list-unstyled">
+            <li id="default-message">
+                <div class="row-masonry row-masonry-lg-1">
+
+                    <div class="col-masonry">
+                        <div class="panel b m0">
+
+                            <div class="panel-heading messaging p-lg mb">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="pull-left">
+                                            <span class="text-bold pl-sm">No Messsage Selected</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <small class="text-muted mt0">No Messages for display.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li id="sender-message" style="display: none;">
+                <div class="row-masonry row-masonry-lg-1">
+
+                    <div class="col-masonry">
+                        <div class="panel b m0">
+
+                            <div class="panel-heading messaging p-lg mb">
+                                <div id="user-message-header" class="row" data-bind="foreach: message_data"></div>
+                            </div>
+
+                            <div id="user-message-posts" data-bind="foreach: { data: posts, afterAdd: messageFadeIn }"></div>
+
+                            <div id="message-progress" class="panel-body" style="display: none">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="text-center">
+                                            <small class="text-muted">Loading...</small><br>
+                                            <img alt="Loading" src="./Messages _ WebDev_files/AjaxLoader.gif">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <div data-bind="visible: notifications().length &gt; 0, foreach: notifications" style="display: none;"></div>
+
+        <div id="send-message" class="row-masonry row-masonry-lg-1" style="display: none;">
+            <div class="col-masonry">
+                <div class="panel b m0">
+                    <div class="panel-heading">
+                        <em class="fa fa-pencil mr"></em>Add your Message
+                    </div>
+                    <div class="panel-body">
+                        <form class="mb mt" data-bind="submit: sendMessage">
+                            <textarea rows="4" placeholder="Reply to ..." class="form-control no-resize" name="message" id="message"></textarea>
+                            <input name="messageHeading" id="messageHeading" type="hidden">
+                            <input name="messageImageLink" id="messageImageLink" type="hidden">
+                            <div class="clearfix">
+                                <div class="pull-right">
+                                    <button id="sendMessageButton" type="submit" class="btn btn-primary mt-sm" disabled="disabled">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<input type="hidden" id="getUserInfoUrl" data-url="/Profile/GetMatchingUser">
+
+
+            </div>
+        </section>
+        <!-- Page footer-->
+        
+    </div>
+
+    
+<!-- Modal-->
+<div id="new-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="myModalLabel" class="modal-title">New Message</h4>
+            </div>
+            <form data-bind="submit: sendNewMessage">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="control-label">To</label>
+                                <div class="ms-ctn form-control ms-as-string " style="" id="ms-contacts"><span class="ms-helper "></span><div class="ms-sel-ctn"><input type="text" class="" placeholder="e.g Marketing, Algorithms, Tech Geek"></div><div class="ms-trigger"><div class="ms-trigger-ico"></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="control-label">Message:</label>
+                                <textarea id="newMessage" rows="6" class="form-control no-resize textarea-comment" name="comment" maxlength="512" data-bind="jqAutoresize: {}" style="overflow-x: hidden; word-wrap: break-word; overflow-y: visible;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+    <!-- =============== VENDOR SCRIPTS ===============-->
+    <script src="./Messages _ WebDev_files/modernizr-2.6.2.js.download"></script>
+<script src="./Messages _ WebDev_files/modernizr-2.8.3.js.download"></script>
+
+    <script src="./Messages _ WebDev_files/jquery-3.1.1.js.download"></script>
+
+    <script src="./Messages _ WebDev_files/bootstrap.min.js.download"></script>
+<script src="./Messages _ WebDev_files/bootstrap-select.min.js.download"></script>
+
+    <script src="./Messages _ WebDev_files/jquery.validate.js.download"></script>
+<script src="./Messages _ WebDev_files/jquery.validate.unobtrusive.js.download"></script>
+
+    <script src="./Messages _ WebDev_files/jquery.storageapi.min.js.download"></script>
+
+    <script src="./Messages _ WebDev_files/jquery.easing.min.js.download"></script>
+
+    <script src="./Messages _ WebDev_files/animo.min.js.download"></script>
+
+    <script src="./Messages _ WebDev_files/jquery.slimscroll.min.js.download"></script>
+
+    <script src="./Messages _ WebDev_files/screenfull.min.js.download"></script>
+
+    <!-- =============== APP SCRIPTS ===============-->
+    <script src="./Messages _ WebDev_files/app.init.min.js.download"></script>
+<script src="./Messages _ WebDev_files/bootstrap-start.min.js.download"></script>
+<script src="./Messages _ WebDev_files/classyloader.min.js.download"></script>
+<script src="./Messages _ WebDev_files/clear-storage.min.js.download"></script>
+<script src="./Messages _ WebDev_files/constants.min.js.download"></script>
+<script src="./Messages _ WebDev_files/localize.min.js.download"></script>
+<script src="./Messages _ WebDev_files/navbar-search.min.js.download"></script>
+<script src="./Messages _ WebDev_files/notify.min.js.download"></script>
+<script src="./Messages _ WebDev_files/panel-tools.min.js.download"></script>
+<script src="./Messages _ WebDev_files/sidebar.min.js.download"></script>
+<script src="./Messages _ WebDev_files/sparkline.min.js.download"></script>
+<script src="./Messages _ WebDev_files/toggle-state.min.js.download"></script>
+<script src="./Messages _ WebDev_files/utils.min.js.download"></script>
+<script src="./Messages _ WebDev_files/chart.min.js.download"></script>
+<script src="./Messages _ WebDev_files/chartist.min.js.download"></script>
+<script src="./Messages _ WebDev_files/chart-knob.min.js.download"></script>
+<script src="./Messages _ WebDev_files/chart-easypie.min.js.download"></script>
+
+    
+    <!-- =============== SignalR SCRIPTS ===============-->
+        <!--Reference the SignalR library. -->
+        <script type="text/javascript" src="./Messages _ WebDev_files/jquery.signalR-2.2.2.min.js.download"></script>
+        <!--Reference the autogenerated SignalR hub script. -->
+        <script type="text/javascript" src="./Messages _ WebDev_files/hubs"></script>
+        <!--Gets populated online users on the offsidebar. -->
+        <script type="text/javascript" src="./Messages _ WebDev_files/hit-counter-hub.js.download"></script>
+        <!-- NOTE: To avoid multiple HTTP request and creating proxies, start only one connection -->
+        <script type="text/javascript" src="./Messages _ WebDev_files/hub-start.js.download"></script>
+
+    
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    
+
+    <!-- CSS -->
+    <link href="./Messages _ WebDev_files/magicsuggest.css" rel="stylesheet" type="text/css">
+
+    <!-- jQuery -->
+    <script src="./Messages _ WebDev_files/magicsuggest.js.download"></script>
+    <script src="./Messages _ WebDev_files/moment.min.js.download"></script>
+    <script src="./Messages _ WebDev_files/autosize.min.js.download"></script>
+    <script src="./Messages _ WebDev_files/knockout-3.4.0.min.js.download"></script>
+    <script src="./Messages _ WebDev_files/messaging.js.download"></script>
+
+    <!-- =============== GOOGLE ==================== -->
+    <!-- Google Analytics -->
+
+    <!-- Hubspot Analytics -->
+
+    <!-- Heap Analytics -->
+
+    
+    
+
+</body></html>

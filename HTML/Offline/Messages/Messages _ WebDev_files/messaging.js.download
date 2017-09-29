@@ -1,0 +1,470 @@
+﻿
+$(document).ready(function () {
+
+    var allMessagesLoaded    = false;
+    var enableInfiniteScroll = false;
+    var messagePageSize      = 12;
+    var messagePageIndex     = 0;
+    var msContacts           = undefined;
+    var viewEmail            = undefined;
+    var messageHubConnection = $.hubConnection();
+    var messageHub           = messageHubConnection.createHubProxy("messagingHub");
+
+    var vm = {
+        currentUserId: undefined,
+        message_data: ko.observableArray([]),
+        posts: ko.observableArray([]),
+        notifications: ko.observableArray([]),
+        messageFadeIn: function(elem) { if (elem.nodeType === 1) $(elem).hide().slideDown(); },
+        sendMessage: function() {
+            messageHub.invoke("SendMessage", $("#currentSenderEmail").text(), $("#message").val(), false)
+                .done(function() {
+                    // Clear inputs
+                    $("#senderEmail").val("");
+                    $("#message").val("");
+                    $("#sendMessageButton").attr("disabled", true);
+                });
+        },
+        sendNewMessage: function() {
+
+            var selText          = document.getElementsByClassName("contact-email");
+            var selectedContacts = "";           
+
+            for (var i = 0; i < selText.length; i++) {
+                selectedContacts += selText[i].value + ",";
+            }
+            // Remove last comma
+            selectedContacts = selectedContacts.substring(0, selectedContacts.length - 1);
+
+            if (selectedContacts) {
+
+              messageHub.invoke("SendMessage", selectedContacts, $("#newMessage").val(), true)
+                 .done(function() {
+                    // Clear inputs
+                    msContacts.clear();
+                    $("#newMessage").val("");
+                    $("#new-message").modal("hide");
+                 });
+           }
+        }
+    };
+
+    var post = function (id, senderId, receiverId, senderMessage, senderDate) {
+
+       //this.id = id;
+
+       this.showLeftMessage  = vm.currentUserId !== senderId;
+       this.showRightMessage = vm.currentUserId === senderId;
+
+       if (this.showLeftMessage) {
+          this.senderMessage = senderMessage;
+          this.senderDate    = senderDate;
+       } else {
+          this.receiverMessage = senderMessage;
+          this.receiverDate    = senderDate;
+       }
+    };
+
+    var messageData = function (senderName, senderEmail, senderImageLink) {
+
+       this.senderName      = senderName;
+       this.senderEmail     = senderEmail;
+       this.senderImageLink = senderImageLink;
+    };
+
+    // Makes elements shown/hidden via jQuery's fadeIn()/fadeOut() methods
+    ko.bindingHandlers.fadeVisible = {
+        init: function (element, valueAccessor) {
+            // Initially set the element to be instantly visible/hidden depending on the value
+            var value = valueAccessor();
+            $(element).toggle(ko.unwrap(value)); // Use "unwrapObservable" so we can handle values that may or may not be observable
+        },
+        update: function (element, valueAccessor) {
+            // Whenever the value subsequently changes, slowly fade the element in or out
+            var value = valueAccessor();
+            ko.unwrap(value) ? $(element).fadeIn() : $(element).fadeOut();
+        }
+    };
+
+    //textarea autosize
+    ko.bindingHandlers.jqAutoresize = {
+        init: function (element, valueAccessor, aBA, vm) {
+            if (!$(element).hasClass("textarea-comment")) {
+                $(element).css("height", "1em");
+            }
+            autosize($(element));
+        }
+    };
+
+    ko.applyBindings(vm);
+
+    // Enable/Disable Send button
+    $("#sendMessageButton").attr("disabled", true);
+    $("#message").keyup(function () {
+        if ($(this).val().length !== 0) {
+            $("#sendMessageButton").attr("disabled", false);
+        } else {
+            $("#sendMessageButton").attr("disabled", true);
+        }
+    });
+
+    function GetData() {
+
+        // To load existing posts
+        $.ajax({
+            url: "/api/messages",
+            dataType: "json",
+            contentType: "application/json",
+            cache: false,
+            type: "GET",
+            data: { senderEmail: viewEmail, messagePageIndex: messagePageIndex, messagePageSize: messagePageSize },
+            success: function (data) {
+
+                if (data !== undefined && data != null && data.length > 0) {
+
+                    $.each(data, function (i, p) {
+                        var newPost = new post(p.id, p.senderID, p.receiverID, p.message, p.date);
+
+                        vm.posts.push(newPost);
+                    });
+
+                    messagePageIndex++;
+                }
+                else {
+
+                    allMessagesLoaded = true;
+
+                    vm.notifications.removeAll();
+
+                    // Update unread count in the server
+                    messageHub.invoke("ResetUnreadMessages", viewEmail);
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //alert('Failed to retrieve account information.');
+            },
+            beforeSend: function () {
+                $("#message-progress").show();
+            },
+            complete: function () {
+                $("#message-progress").hide();
+            }
+        });
+    }
+
+    // Adding infinite scroll
+    $(window).scroll(function () {
+        if ($(window).scrollTop() ===
+           $(document).height() - $(window).height()) {
+            if (enableInfiniteScroll) {
+                GetData();
+            }
+        }
+    });
+
+    // SignalR Functions
+
+    function ResetMessageCount(senderEmail)
+    {
+        var tagId = getTagId(senderEmail);
+        // Update count badge
+        var c = document.getElementById("sender_" + tagId).getElementsByTagName("span")[1];
+        c.innerHTML = "0";
+    }
+
+    function UpdateMessageCount(tagId, newCount)
+    {
+        // Update count badge
+        var c = document.getElementById("sender_" + tagId).getElementsByTagName("span")[1];
+        c.innerHTML = newCount.toString();
+    }
+
+    DeleteThread = function() {
+        messageHub.invoke("DeleteThread", viewEmail);
+    };
+
+    LastMessage = function(email) {
+
+        enableInfiniteScroll = false;
+
+        //To load existing posts
+        $.ajax({
+                url: "/api/messages/last",
+                dataType: "json",
+                contentType: "application/json",
+                cache: false,
+                type: "GET",
+                data: { senderEmail: email },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve last message.');
+                }
+            })
+            .done(function(data) {
+                
+                if (data !== null && data !== undefined) {
+                    var newPost = new post(data.id, data.senderID, data.receiverID, data.message, data.date);
+                    vm.posts.push(newPost);
+
+                    // Update unread count in the server
+                    messageHub.invoke("ResetUnreadMessages", email);
+                }
+            });
+    };
+
+    ViewMessages = function(email) {
+
+        // Update global vars
+        messagePageIndex     = 0;
+        viewEmail            = email;
+        allMessagesLoaded    = false;
+        enableInfiniteScroll = false;
+
+        // Clear current content
+        $("#user-message-header").empty();
+        $("#user-message-posts").empty();
+        vm.notifications.removeAll();
+
+        var tagId     = getTagId(email);
+        var userName  = document.getElementById("sender_" + tagId).getElementsByTagName("strong")[0].innerHTML;
+        var imageLink = document.getElementById("sender_" + tagId).getElementsByTagName("img")[0];
+
+        if (imageLink === undefined || imageLink === null) {
+            imageLink = "../images/user.png";
+        } else {
+            imageLink = imageLink.src;
+        }
+
+        var newMessage = new messageData(userName, email, imageLink);
+        vm.message_data.push(newMessage);
+
+        //To load existing posts
+        $.ajax({
+                url: "/api/messages",
+                dataType: "json",
+                contentType: "application/json",
+                cache: false,
+                type: "GET",
+                data: { senderEmail: email, messagePageIndex: messagePageIndex, messagePageSize: messagePageSize },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve account information.');
+                }
+            })
+            .done(function(data) {
+
+                $.each(data,
+                    function(i, p) {
+                        var newPost = new post(p.id, p.senderID, p.receiverID, p.message, p.date);
+
+                        vm.posts.push(newPost);
+                    });
+
+                if (data.length < messagePageSize) {
+                    allMessagesLoaded = true;
+                    // Update unread count in the server
+                    messageHub.invoke("ResetUnreadMessages", viewEmail);
+                }
+
+                messagePageIndex++;
+
+                enableInfiniteScroll = true;
+            });
+
+        // Display content
+        $("#message").attr("placeholder", 'Reply to "' + userName + '"');
+        $("#default-message").hide();
+        $("#sender-message").show();
+        $("#send-message").show();
+    };
+
+    function AddSender(email, image, name, position, unreadMessages) {
+
+        var tagId = getTagId(email);
+
+        if (document.getElementById("sender_" + tagId) === null) {
+
+            var imageLink = "";
+
+            if (image === null || image === "#") {
+                imageLink = '<em class="fa fa-user fa-2x"></em>';
+            }
+            else {
+                imageLink = '<img src="' + image + '" alt="Image" class="media-object img-circle thumb32" />';
+            }
+
+            $('#sender-users').append('<a id="sender_' + tagId + '" href="#" class="media p mt0 list-group-item" onclick="ViewMessages(\'' + email + '\')">' +
+                                         '<span class="pull-right">' +
+                                            '<span class="badge bg-gray">'+ unreadMessages +'</span>' +
+                                         '</span>' +
+                                         '<span class="pull-left">' +
+                                           imageLink +
+                                         '</span>' +
+                                         '<span class="media-body">' +
+                                            '<span class="media-heading">' +
+                                               '<strong>' + name + '</strong><br/><small class="text-muted">' + position + '</small>' +
+                                            '</span>' +
+                                         '</span>' +
+                                      '</a>');
+        } else {
+            // Update the unread messages count for the email
+            UpdateMessageCount(tagId, unreadMessages);
+        }
+    }
+
+    function getTagId(email) {
+
+        var tagId     = email.replace("@", "_");
+        var firstChar = tagId.substring(0,1);
+
+        if (firstChar !== firstChar.toLowerCase() && firstChar !== firstChar.toUpperCase()) {
+            tagId = tagId.replace(firstChar, "i");
+        }
+
+        return tagId;
+    }
+
+    var initContactsMagicSuggest = function() {
+
+        $.ajax({
+            url: $("#getUserInfoUrl").data("url"),
+            type: "POST",
+            cache: false,
+            dataType: "json",
+            success: function(recv) {
+                msContacts = $("#ms-contacts")
+                    .magicSuggest({
+                        data: recv,
+                        valueField: "id",
+                        displayField: "label",
+                        renderer: function(recv) {
+                            return '<div style="padding: 5px; overflow:hidden;">' +
+                                   '<div style="float: left;"><img src="' +
+                                       recv.image +
+                                       '" class="mt-sm img-circle thumb32"/></div>' +
+                                   '<div style="float: left; margin-left: 5px">' +
+                                   '<div style="font-weight: bold; color: #333; font-size: 11px; line-height: 11px">' +
+                                       recv.label +
+                                   '</div>' +
+                                   '<div style="color: #999; font-size: 10px">' +
+                                       recv.description +
+                                   '</div>' + '</div>' +
+                                   '</div><div style="clear:both;"></div>'; // make sure we have closed our dom stuff
+                        },
+                        resultAsString: true,
+                        allowFreeEntries: false,
+                        highlight: false,
+                        //mode: 'remote', // this allows to perform external queries
+                        maxSuggestions: 4,
+                        maxSelection: 4,
+                        minChars: 2,
+                        selectionRenderer: function(recv) {
+                            return '<div style="overflow:hidden;height:35px;">' +
+                                        '<div style="float: left;"><img src="' +
+                                            recv.image +
+                                        '" class="mt-sm img-circle thumb32"/></div>' +
+                                        '<div style="float: left;margin-top: 10px; margin-left: 5px;display:inline-block;">' +
+                                        '<span style="color: #333; font-size: 11px;">' +
+                                            recv.label +
+                                        '</span>' +
+                                        '</div>' +
+                                        '<input type="hidden" class="contact-email" value="' +
+                                            recv.email + '" />' +
+                                   '</div><div style="clear:both;"></div>'; // make sure we have closed our dom stuff
+
+                        }
+                    });
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                //alert('Failed to retrieve contact list.');
+            }
+        });
+
+    };
+
+    // SignalR hub subscription
+
+    messageHub.on("receiveUserId", function (userId) {
+        vm.currentUserId = userId;
+        // Load available senders (messages)
+        messageHub.invoke("GetSessions");
+        initContactsMagicSuggest();
+    });
+
+    messageHub.on("receivedNewPost", function (recvEmail, sentEmail, recvId) {
+
+        if (viewEmail !== null && viewEmail !== "" && viewEmail === recvEmail || viewEmail === sentEmail && vm.currentUserId === recvId) {
+            if (allMessagesLoaded) {
+                LastMessage(viewEmail);
+                vm.notifications.removeAll();
+            }
+            else {
+                // If viewEmail user added a new post but current viewer has not scrolled down or there is no a scroll
+                var tagId    = getTagId(viewEmail);
+                var userName = document.getElementById("sender_" + tagId).getElementsByTagName("strong")[0].innerHTML;
+                vm.notifications.unshift("'" + userName + "' has sent a new message.");
+            }
+        }
+
+        messageHub.invoke("GetSessions");
+    });
+
+    messageHub.on("availableMessages", function(list) {
+
+        if (list.length > 0) {
+            for (var i = 0; i < list.length; i++) {
+                AddSender(list[i].items[0].Email, list[i].items[0].ImageLink, list[i].items[0].Name, list[i].items[0].Position, list[i].items[0].UnreadMessagesCount);
+            }
+            $("#default-users").hide();
+            $("#sender-users").show();
+        }
+        else {
+            $("#sender-users").hide();
+            $("#default-users").show();
+        }
+
+    });
+
+    messageHub.on("removeMessages",
+        function(theEmail) {
+
+            $("#sender-message").hide();
+            $("#send-message").hide();
+            $("#default-message").show();
+
+            vm.notifications.removeAll();
+            vm.message_data.removeAll();
+            vm.posts.removeAll();
+
+            var tagId           = getTagId(theEmail);
+            var availableSender = document.getElementById("sender_" + tagId);
+            availableSender.outerHTML = "";
+
+            // There are other messages available
+            if ($("[id^=sender_]").length === 0) {
+                $("#sender-users").hide();
+                $("#default-users").show();
+            }
+
+        });
+
+    messageHub.on("resetUnreadMessages", function (senderEmail) {
+        ResetMessageCount(senderEmail);
+    });
+
+    messageHubConnection.start().done(function () {
+        // connected
+        messageHub.invoke("Join");
+    });
+
+    $("#new-message").on("hide.bs.modal", function (e) {
+
+        try {
+            // Clear inputs
+            $("#newMessage").val("");
+            msContacts.clear();
+        } catch (err) {
+            $(".ms-contact-input").val("");
+        }
+
+    });
+
+});

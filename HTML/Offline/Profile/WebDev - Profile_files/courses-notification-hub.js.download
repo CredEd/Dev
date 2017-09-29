@@ -1,0 +1,79 @@
+﻿
+// Global variables
+var thisCourseNotificationHub = $.connection.courseNotificationHub;
+//$.connection.hub.logging = true;
+
+$(document).ready(function () {
+
+   // When admin is previewing, the notifications-bell does not show
+   if (document.getElementById("notifications-bell") != null) {
+      document.getElementById("notifications-bell").addEventListener("click",
+         function() {
+            // Acknowledge messages
+            thisCourseNotificationHub.server.acknowledgeMessage();
+         });
+   }
+
+   thisCourseNotificationHub.client.refreshEnrolledCourses = function () {
+      GetExternalCourses();
+   };
+
+   thisCourseNotificationHub.client.taskNotificationAck = function() {
+      var alertNotification = document.getElementById("alert-notification");
+
+      if (alertNotification != null) {
+         alertNotification.innerHTML     = "";
+         alertNotification.style.display = "none";
+      }
+   }
+
+   thisCourseNotificationHub.client.taskNotification = function(notificationId) {
+      
+      if (notificationId != undefined) {
+         var tasksNotification = document.getElementById("tasks-notification");
+
+         if (tasksNotification != null) {
+
+            if (notificationId === 1) {
+               tasksNotification.innerHTML = "Courses synced!";
+            }
+            else if (notificationId === 2) {
+               tasksNotification.innerHTML = "No new course changes have been found";
+            }
+            else if (notificationId === 3) {
+               tasksNotification.innerHTML = "No courses have been found";
+            }
+            else if (notificationId === 4) {
+               tasksNotification.innerHTML = "New course enrolled!";
+            }
+            else if (notificationId === 5) {
+               tasksNotification.innerHTML = "Attempted to Purchase the course but is only available for Audit";
+            }
+            else if (notificationId === 6) {
+               tasksNotification.innerHTML = "Attempted to Audit the course but is only available for Purchase";
+            }
+            else if (notificationId === 7) {
+               tasksNotification.innerHTML = "This course is currently being updated, it will be ready in the next 24 hours";
+            }
+            else if (notificationId === 8) {
+               tasksNotification.innerHTML = "There was a problem with the last task";
+            }
+            else if (notificationId === 9) {
+               tasksNotification.innerHTML = "The provider account could not be linked";
+            }
+            else if (notificationId === 10) {
+               tasksNotification.innerHTML = "Provider account update completed";
+            }
+
+            var alertNotification = document.getElementById("alert-notification");
+
+            if (alertNotification != null) {
+               alertNotification.innerHTML     = "!";
+               alertNotification.style.display = "inline";
+            }
+         }
+      }
+
+   }
+
+});

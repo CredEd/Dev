@@ -1,0 +1,162 @@
+﻿
+// Global variables
+// none
+
+
+$("#sync-courses").attr("disabled", "disabled");
+
+// Function to look for Ids in the html with the passed variable, pattern
+function getElementsStartsWithId(id) {
+   var children = document.body.getElementsByTagName("*");
+   var elements = [], child;
+   for (var i = 0, length = children.length; i < length; i++) {
+      child = children[i];
+      if (child.id.substr(0, id.length) === id)
+         elements.push(child);
+   }
+   return elements;
+}
+
+function ShowMore(pattern) {
+
+   // Look for the pattern that start with and remove 'None' for display attribute
+   // The loop start at 12 since we want to show the rest of the courses hidden
+   var elements = getElementsStartsWithId(pattern);
+   for (var i = 12; i < elements.length; i++) {
+      document.getElementById(elements[i].id).style.display = "";
+   }
+
+   // Hide Show More link button
+   $("#showMore").attr("hidden", "hidden");
+
+}
+
+function UpdateTourBit() {
+   $.ajax({
+      cache: false,
+      async: true,
+      type: "POST",
+      url: "/Profile/UpdateTourStatus",
+      success: function () {
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+      }
+   });
+}
+
+function StartTour() {
+   // Prepare steps
+   var tourSteps = [];
+   $(".tour-step")
+      .each(function () {
+         var stepsOptions = $(this).data();
+         var theElement = this.id;
+         stepsOptions.element = "#" + theElement;
+
+         if (theElement.indexOf("ai-modal") !== -1) {
+            stepsOptions.backdropContainer = ".parent";
+         } else if (theElement.indexOf("enrolled-tab") !== -1) {
+            stepsOptions.backdropContainer = ".parent";
+            stepsOptions.onShown = function () { document.getElementById("enrolled-link").click(); };
+         }
+         else if (theElement.indexOf("portfolio-tab") !== -1) {
+            stepsOptions.backdropContainer = ".parent";
+            stepsOptions.onShown = function () { document.getElementById("portfolio-link").click(); };
+         }
+         tourSteps.push(stepsOptions);
+      });
+
+   var recommendedCourses = $("#recommended-tab").data();
+   recommendedCourses.backdropContainer = ".parent";
+   recommendedCourses.element   = "#recommended-tab";
+   recommendedCourses.placement = "right";
+   recommendedCourses.title     = "What's next";
+   recommendedCourses.content   =
+      "The more courses you take, and the more we get to know each other, the better I can serve you. So go ahead and dive in, and I’ll be right here whenever you need me.";
+   recommendedCourses.onShown = function() {
+      document.getElementById("recommended-link").click();
+   };
+   recommendedCourses.onHide = function () {
+      // Bounce the AI image
+      $("#ai-bot").animo({ animation: "bounce" });
+   };
+
+   tourSteps.push(recommendedCourses);
+
+   if (tourSteps.length) {
+      // Instance the tour
+      var tour = new Tour({
+         backdrop: true,
+         autoScroll: true,
+         onShown: function (tour) {
+            // BootstrapTour is not compatible with z-index based layout
+            // so adding position:static for this case makes the browser
+            // to ignore the property
+            $(".wrapper > section").css({ 'position': "static" });
+
+         },
+         onHide: function (tour) {
+            // finally restore on destroy and reuse the value declared in stylesheet
+            $(".wrapper > section").css({ 'position': "" });
+         },
+         steps: tourSteps
+      });
+
+      // Initialize the tour
+      tour.init();
+
+      // Start the tour
+      tour.restart();
+   }
+}
+
+function ValidateResetForm() {
+   event.preventDefault();
+}
+
+function ResetForm() {
+
+   swal({
+      title: "Do you want to reset this tour account?",
+      text: "",
+      type: "warning",
+      animation: false,
+      showCancelButton: true,
+      confirmButtonColor: "#ff8517",
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+      closeOnConfirm: false,
+      closeOnCancel: true
+   },
+      function (isConfirm) {
+
+         if (isConfirm) {
+            swal("Done!", "The account had been resetted", "success");
+            $("#resetAccountForm").submit();
+         } else {
+            event.preventDefault();
+         }
+      });
+}
+
+$(document).ready(function() {
+
+   $(".sidebar ul.nav li").click(function (event) {
+      $(".sidebar ul.nav li").removeClass("active");
+      if (!$(this).closest("li").hasClass("active")) {
+
+         // Add if the child element is active
+         if ($(this).find("a.active").length !== 0) {
+
+            $(this).closest("li").addClass("active");
+         }
+      }
+   });
+
+   //RaisePrograms(1);
+
+   $(document).on("click", '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox();
+   });
+});
