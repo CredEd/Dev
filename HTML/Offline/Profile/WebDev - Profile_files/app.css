@@ -1036,6 +1036,23 @@ _:-ms-lang(x),
   }
 }
 
+@media (max-width: 767px) {
+  .topnavbar {
+    background-color: #000;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+
+  .topnavbar::before,
+  .topnavbar::after {
+    display: none;
+  }
+}
+
 .topnavbar .navbar-header {
   background-color: #000;
 /*  background-color: transparent;
@@ -1056,7 +1073,7 @@ _:-ms-lang(x),
 
 @media only screen and (max-width: 767px) {
    header.topnavbar-wrapper {
-      margin-bottom: 120px;
+      margin-bottom: 70px;
    }
 }
 
@@ -1084,8 +1101,16 @@ _:-ms-lang(x),
 }
 .topnavbar .navbar-nav > li > a,
 .topnavbar .navbar-nav > .open > a {
-  color: #27b6de;
+  /*color: #27b6de;*/
+  color: #fff;
 }
+
+@media (max-width: 350px) {
+  .nav>li>a {
+    padding: 10px 10px;
+  }
+}
+
 .topnavbar .navbar-nav > li > a:hover,
 .topnavbar .navbar-nav > .open > a:hover,
 .topnavbar .navbar-nav > li > a:focus,
@@ -1271,6 +1296,7 @@ _:-ms-lang(x),
     right: auto;
   }
   .nav-wrapper .navbar-nav.navbar-right .open .dropdown-menu {
+    top: 100%;
     left: auto;
     right: 0;
   }
@@ -1590,6 +1616,13 @@ _:-ms-lang(x),
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+}
+
+@media (max-width: 767px) {
+  .offsidebar {
+    top: 68px;
+    margin-top: 0;
+  }
 }
 
 .offsidebar-categories {
@@ -13260,6 +13293,10 @@ a.btn {
     padding: 10px 48px 10px 48px;
 }
 
+div.nav-wrapper ul.nav li > a {
+   border: 1px solid transparent;
+}
+
 div.nav-wrapper ul.nav li > a:hover {
    border: 1px solid #0960a5;
 }
@@ -13661,7 +13698,8 @@ input[name=searchCourse] {
     }
 
 .course-image-container {
-  background-size:cover;
+  background-size:contain;
+  background-position: center;
   background-repeat:no-repeat;
   width:100%;
   height:190px;

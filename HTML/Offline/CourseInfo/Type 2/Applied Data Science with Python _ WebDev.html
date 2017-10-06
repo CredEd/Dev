@@ -46,7 +46,7 @@
      
     <!-- top navbar -->
     <header class="topnavbar-wrapper">
-        <nav class="navbar topnavbar navbar-fixed-top" style="background-color: white;">
+        <nav class="navbar topnavbar navbar-fixed-top courseinfo-nav" style="background-color: white;">
            <div class="navbar-header" style="background-color: white;">
               <a href="http://localhost:62825/Profile" class="navbar-brand">
                  <div class="brand-logo">
@@ -113,23 +113,12 @@
 <div class="container">
 
     <div class="row course-body">
-        <div class="col-md-9">
-
-            
-
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <ul class="course-tabs course-primary-nav nav navbar-nav">
-                        <li class="course-tabs-item"><a href="http://localhost:62825/Course/coursera/data-science-python#courseAbout" data-toggle="tab" class="course-tabs-link">About</a></li>
-                       
-
-                       
-                             <li class="course-tabs-item"><a href="http://localhost:62825/Course/coursera/data-science-python#courseCertificate" data-toggle="tab" class="course-tabs-link ">Certificate</a></li>
-
-                       
-
-                       
-                       
+        <div class="col-sm-9">
+          <div class="panel panel-default">
+              <div class="panel-body">
+                  <ul class="course-tabs course-primary-nav nav navbar-nav">
+                      <li class="course-tabs-item"><a href="http://localhost:62825/Course/coursera/data-science-python#courseAbout" data-toggle="tab" class="course-tabs-link">About</a></li>
+                       <li class="course-tabs-item"><a href="http://localhost:62825/Course/coursera/data-science-python#courseCertificate" data-toggle="tab" class="course-tabs-link ">Certificate</a></li>
                     </ul>
                 </div>
             </div>
@@ -148,9 +137,7 @@
 
                                 </p><h4 class="text-bold">About this Course</h4>
                                 <hr>
-                                The 5 courses in this University of Michigan specialization introduce learners to data science through the python programming language. This skills-based specialization is intended for learners who have basic a python or programming background, and want to apply statistical, machine learning, information visualization, text analysis, and social network analysis techniques through popular python toolkits such as pandas, matplotlib, scikit-learn, nltk, and networkx to gain insight into their data.
-
-Introduction to Data Science in Python (course 1), Applied Plotting, Charting &amp; Data Representation in Python (course 2), and Applied Machine Learning in Python (course 3) should be taken in order and prior to any other course in the specialization.<br><br>
+                                The 5 courses in this University of Michigan specialization introduce learners to data science through the python programming language. This skills-based specialization is intended for learners who have basic a python or programming background, and want to apply statistical, machine learning, information visualization, text analysis, and social network analysis techniques through popular python toolkits such as pandas, matplotlib, scikit-learn, nltk, and networkx to gain insight into their data.Introduction to Data Science in Python (course 1), Applied Plotting, Charting &amp; Data Representation in Python (course 2), and Applied Machine Learning in Python (course 3) should be taken in order and prior to any other course in the specialization.<br><br>
                                  After completing those, courses 4 and 5 can be taken in any order. All 5 are required to earn a certificate.<br>
                              <p></p>
 
@@ -217,68 +204,70 @@ Introduction to Data Science in Python (course 1), Applied Plotting, Charting &a
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-sm-3 courseinfo-side-column">
+          <div id="courseinfo-side-floater" class="courseinfo-side-wrapper">
+              <div class="courseinfo-side">
 
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    
-                   <h4>Course Info</h4>
-                   <div class="course-info">
-                           <div class="row mb-sm">
-                              <div class="col-md-4">
-                                 Skill:
-                              </div>
-                              <div class="col-md-8">
-                                 Intermediate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                              </div>
-                           </div>
-                           <div class="row mb-sm">
-                              <div class="col-md-4">
-                                 Specialization:
-                              </div>
-                              <div class="col-md-8">
-                                 Yes
-                              </div>
-                           </div>
-                         <div class="row mb-sm">
-                            <div class="col-md-4">
-                               Provider:
-                            </div>
-                            <div class="col-md-8">
-                               Coursera
-                            </div>
-                         </div>
-                         <div class="row mb-sm">
-                            <div class="col-md-4">
-                               Category:
-                            </div>
-                            <div class="col-md-8">
-                               Data Analysis
-                            </div>
-                         </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        
+                       <h4>Course Info</h4>
+                       <div class="course-info">
+                               <div class="row mb-sm">
+                                  <div class="col-md-4">
+                                     Skill:
+                                  </div>
+                                  <div class="col-md-8">
+                                     Intermediate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                  </div>
+                               </div>
+                               <div class="row mb-sm">
+                                  <div class="col-md-4">
+                                     Specialization:
+                                  </div>
+                                  <div class="col-md-8">
+                                     Yes
+                                  </div>
+                               </div>
+                             <div class="row mb-sm">
+                                <div class="col-md-4">
+                                   Provider:
+                                </div>
+                                <div class="col-md-8">
+                                   Coursera
+                                </div>
+                             </div>
+                             <div class="row mb-sm">
+                                <div class="col-md-4">
+                                   Category:
+                                </div>
+                                <div class="col-md-8">
+                                   Data Analysis
+                                </div>
+                             </div>
 
-                      <div class="row mb-sm">
-                         <div class="col-md-4">
-                            Certificate:
-                         </div>
-                         <div class="col-md-8">
+                          <div class="row mb-sm">
+                             <div class="col-md-4">
+                                Certificate:
+                             </div>
+                             <div class="col-md-8">
 
-                            Yes
-                         </div>
-                      </div>
-                      <div class="row mb-sm">
-                         <div class="col-md-4">
-                            Enroll:
-                         </div>
-                         <div class="col-md-8">
-                            <span class="course-current-price text-bold">$355.00</span>
-                         </div>
-                      </div>
-                   </div>
+                                Yes
+                             </div>
+                          </div>
+                          <div class="row mb-sm">
+                             <div class="col-md-4">
+                                Enroll:
+                             </div>
+                             <div class="col-md-8">
+                                <span class="course-current-price text-bold">$355.00</span>
+                             </div>
+                          </div>
+                       </div>
+
+                    </div>
 
                 </div>
-
-            </div>
             
                   <div class="row mt-lg">
                      <div class="col-sm-12 mb-lg">
@@ -287,8 +276,8 @@ Introduction to Data Science in Python (course 1), Applied Plotting, Charting &a
                         </a>
                      </div>
                   </div>
-
-
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -515,6 +504,23 @@ Introduction to Data Science in Python (course 1), Applied Plotting, Charting &a
 
      <!-- Heap Analytics -->
 
-
+    <script type="text/javascript">
+       $(function(){
+           // Sidebar floater
+            var sidebar = $('#courseinfo-side-floater');
+            var sidebarScrollTop = $('.courseinfo-side').scrollTop();
+            var sidebarWidth = $('.courseinfo-side').get(0).offsetWidth;
+            $('.courseinfo-side').css('width', sidebarWidth);
+            document.addEventListener('scroll', function (event) {
+              var scroll = $(window).scrollTop();
+              if (scroll < 235) {
+                sidebar.removeClass("sticky");
+              }
+              else {
+                sidebar.addClass("sticky");
+              }
+          }, true);
+    })
+     </script>
      
 </body></html>

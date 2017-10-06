@@ -109,6 +109,52 @@ now {
    border: none;
 }
 
+@media (min-width: 767px) {
+  .courseinfo-side-column {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .courseinfo-side-wrapper {
+    position: relative;
+  }
+
+  .courseinfo-side-wrapper.sticky {
+    position: fixed;
+    top: 90px;
+    /*right: 15px;*/
+  }
+
+  .courseinfo-side {
+    position: absolute;
+    top: -70px;
+    left: 0;
+    right: 0;
+  }
+
+  .courseinfo-side-wrapper.sticky .courseinfo-side {
+    position: static;
+  }
+}
+
+@media (min-width: 992px) {
+  .courseinfo-side-wrapper.sticky {
+    right: calc((100% - 970px) / 2);
+  }
+}
+
+@media (min-width: 1200px) {
+  .courseinfo-side-wrapper.sticky {
+    right: calc((100% - 1170px) / 2);
+  }
+}
+
+@media (max-width: 767px) {
+  .courseinfo-side {
+    width: 100% !important;
+  }
+}
+
 .well {
   border: 0;
   border-radius: 0;
@@ -356,7 +402,7 @@ html,
 body {
   height: 100%;
   background-color: #f5f7fa;
-  overflow: auto;
+  /*overflow: auto;*/
 }
 .wrapper {
   position: relative;
@@ -1012,6 +1058,34 @@ _:-ms-lang(x),
 /* ========================================================================
    Component: top-navbar.less
  ========================================================================== */
+
+ @media (max-width: 767px) {
+  .courseinfo-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+
+  .courseinfo-nav::before,
+  .courseinfo-nav::after {
+    display: none;
+  }
+
+  .topnavbar .navbar-header .brand-logo {
+    height: 100%;
+  }
+
+  ul.nav.navbar-nav.navbar-right li a.btn {
+    margin-top: 0;
+  }
+}
+
 .topnavbar {
   -webkit-backface-visibility: hidden;
   /* fixes chrome jump */
@@ -13738,6 +13812,18 @@ input[name=searchCourse] {
 
 .course-body {
     margin-top: 25px;
+}
+
+@media (max-width: 767px) {
+  .course-body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+  }
 }
 
 .course-image {

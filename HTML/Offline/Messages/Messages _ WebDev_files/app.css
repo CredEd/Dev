@@ -13260,6 +13260,10 @@ a.btn {
     padding: 10px 48px 10px 48px;
 }
 
+div.nav-wrapper ul.nav li > a {
+   border: 1px solid transparent;
+}
+
 div.nav-wrapper ul.nav li > a:hover {
    border: 1px solid #0960a5;
 }
@@ -13269,7 +13273,7 @@ div.nav-wrapper ul.nav li > a:hover {
 }
 
 .all-messages {
-   width: 290px;
+   /*width: 290px;*/
 }
 
 @media only screen and (max-width: 1024px) {

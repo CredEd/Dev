@@ -197,7 +197,7 @@ search.addWidget(
                    rating += '</div>';
 
                    if (hit.Price > hit.PromotionalPrice && hit.PromotionalPrice !== 0) {
-                       return '<div class="col-xs-12 col-sm-6 col-md-3"><a target="_blank" title="' + hit.Title + '" class="link-unstyled" href="/Course/' + hit.TableName + '/' + hit.Slug + '"><div class="ais-hits--item">' +
+                       return '<div class="single-course"><a target="_blank" title="' + hit.Title + '" class="link-unstyled" href="/Course/' + hit.TableName + '/' + hit.Slug + '"><div class="ais-hits--item">' +
                            '<article class="hit">' +
                            '<div class="product-picture-wrapper">' +
                            '<div class="product-picture" style="background-image: url(\'' + hit.ImageLink + '\')"></div>' +
@@ -215,7 +215,7 @@ search.addWidget(
                            '</div></div></a>';
                    }
                    else if (hit.Price === 0) {
-                       return '<div class="col-xs-12 col-sm-6 col-md-3"><a target="_blank" title="' + hit.Title + '" class="link-unstyled" href="/Course/' + hit.TableName + '/' + hit.Slug + '"><div class="ais-hits--item">' +
+                       return '<div class="single-course"><a target="_blank" title="' + hit.Title + '" class="link-unstyled" href="/Course/' + hit.TableName + '/' + hit.Slug + '"><div class="ais-hits--item">' +
                            '<article class="hit">' +
                            '<div class="product-picture-wrapper">' +
                            '<div class="product-picture" style="background-image: url(\'' + hit.ImageLink + '\')"></div>' +
@@ -232,7 +232,7 @@ search.addWidget(
                            '</div></div></a>';
                    } else {
 
-                       return '<div class="col-xs-12 col-sm-6 col-md-3"><a target="_blank" title="' + hit.Title + '" class="link-unstyled" href="/Course/' + hit.TableName + '/' + hit.Slug + '"><div class="ais-hits--item">' +
+                       return '<div class="single-course"><a target="_blank" title="' + hit.Title + '" class="link-unstyled" href="/Course/' + hit.TableName + '/' + hit.Slug + '"><div class="ais-hits--item">' +
                            '<article class="hit">' +
                            '<div class="product-picture-wrapper">' +
                            '<div class="product-picture" style="background-image: url(\'' + hit.ImageLink + '\')"></div>' +
@@ -267,7 +267,7 @@ search.addWidget(
         //$("#hits-container").children("div:first").innerHTML = '';
         //$("#hits-container").children("div:last").innerHTML  = '';
 
-        html.splice(0, 0, '<div class="row">');
+        html.splice(0, 0, '<div class="hits-row">');
         html.splice(html.length, 0, '</div>');
 
         $("#hits-container").append(html.join(''));
@@ -361,3 +361,12 @@ search.addWidget(
 );
 
 search.start();
+
+// Filter toggle
+$(document).on('click', '.filter-toggle', function(){
+  $('body').toggleClass('filter-open');
+});
+
+$(document).on('click','.filter-overlay',function(){
+  $('body').removeClass('filter-open');
+});
